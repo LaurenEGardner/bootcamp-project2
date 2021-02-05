@@ -47,7 +47,7 @@ def export2019data():
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(export2019.COUNTRY_NAME, export2019.COMMODITY).all()
+    results = session.query(export2019.COUNTRY_NAME, export2019.COMMODITY, export2019.COMMODITY_DESCRIPTION, export2019.MONTH, export2019.GENERAL_VALUES_MONTH).all()
 
     session.close()
 
@@ -55,12 +55,15 @@ def export2019data():
     export2019_data = []
     for COUNTRY_NAME, COMMODITY in results:
         export2019_dict = {}
-        export2019_dict["COUNTRY_NAME"] = Country
-        export2019_dict["COMMODITY"] = Commodity
-        country_commodity.append(export2019_dict)
+        export2019_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        export2019_dict["COMMODITY"] = str(COMMODITY)
+        export2019_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
+        export2019_dict["MONTH"] = MONTH
+        export2019_dict["MONTHLY_VALUES"] = GENERAL_VALUES_MONTH
+        export2019_data.append(export2019_dict)
 
     # turn the list of dicts into an array of objects
-    return jsonify(pizzas_eaten)
+    return jsonify(export2019_data)
 
 # @app.route("/export2020")
 # def export2020data():
@@ -92,16 +95,16 @@ def export2019data():
 
 #     session.close()
 
-    # Create a dictionary from row of data and append to a list of dictionaries
-    export2019_data = []
-    for COMMODITY, COUNTRY_NAME in results:
-        pizza_dict = {}
-        pizza_dict["month"] = month
-        pizza_dict["pizza"] = str(pizza)
-        pizzas_eaten.append(pizza_dict)
+    # # Create a dictionary from row of data and append to a list of dictionaries
+    # export2019_data = []
+    # for COMMODITY, COUNTRY_NAME in results:
+    #     pizza_dict = {}
+    #     pizza_dict["month"] = month
+    #     pizza_dict["pizza"] = str(pizza)
+    #     pizzas_eaten.append(pizza_dict)
 
-    # turn the list of dicts into an array of objects
-    return jsonify(pizzas_eaten)
+    # # turn the list of dicts into an array of objects
+    # return jsonify(pizzas_eaten)
 
 
 if __name__ == '__main__':
