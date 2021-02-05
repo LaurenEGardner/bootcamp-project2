@@ -94,7 +94,7 @@ def export2019data():
 
     # Create a dictionary from row of data and append to a list of dictionaries
     export2019_data = []
-    for COMMODITY, pizza in results:
+    for COMMODITY, COUNTRY_NAME in results:
         pizza_dict = {}
         pizza_dict["month"] = month
         pizza_dict["pizza"] = str(pizza)
