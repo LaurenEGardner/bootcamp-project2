@@ -5,7 +5,7 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request, render_template
 
 
 #################################################
@@ -47,61 +47,119 @@ def export2019data():
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(export2019.COUNTRY_NAME, export2019.COMMODITY).all()
+    results = session.query(export2019.COUNTRY_CODE, export2019.COUNTRY_NAME, export2019.DOMESTIC_FOREIGN_CODE, export2019.DISTRICT, export2019.DISTRICT_NAME, export2019.ALL_VALUES_MONTH, export2019.ALL_VALUES_YEAR, export2019.COMMODITY_DESCRIPTION, export2019.COMMODITY, export2019.YEAR, export2019.MONTH).all()
 
     session.close()
 
-# Create a dictionary from row of data and append to a list of dictionaries
+#Create a dictionary from row of data and append to a list of dictionaries
     export2019_data = []
-    for COUNTRY_NAME, COMMODITY in results:
+    for COUNTRY_CODE, COUNTRY_NAME, DOMESTIC_FOREIGN_CODE, DISTRICT, DISTRICT_NAME, ALL_VALUES_MONTH, ALL_VALUES_YEAR, COMMODITY_DESCRIPTION, COMMODITY, YEAR, MONTH in results:
         export2019_dict = {}
-        export2019_dict["COUNTRY_NAME"] = Country
-        export2019_dict["COMMODITY"] = Commodity
-        country_commodity.append(export2019_dict)
+        export2019_dict["COUNTRY_CODE"] = COUNTRY_CODE
+        export2019_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        export2019_dict["DOMESTIC_FOREIGN_CODE"] = DOMESTIC_FOREIGN_CODE
+        export2019_dict["DISTRICT"] = DISTRICT
+        export2019_dict["DISTRICT_NAME"] = DISTRICT_NAME
+        export2019_dict["ALL_VALUES_MONTH"] = ALL_VALUES_MONTH
+        export2019_dict["ALL_VALUES_YEAR"] = ALL_VALUES_YEAR
+        export2019_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
+        export2019_dict["COMMODITY"] = COMMODITY
+        export2019_dict["YEAR"] = YEAR
+        export2019_dict["MONTH"] = MONTH
+        export2019_data.append(export2019_dict)
 
     # turn the list of dicts into an array of objects
-    return jsonify(pizzas_eaten)
+    return jsonify(export2019_data)
+    
 
-# @app.route("/export2020")
-# def export2020data():
+@app.route("/export2020")
+def export2020data():
 #     # Create our session (link) from Python to the DB
-#     session = Session(engine)
+    session = Session(engine)
 
-#     # Query all importexport data
-#     results = session.query(export2020.COUNTRY_NAME, export2020.COMMODITY, export2019).all()
+    # Query all importexport data
+    results = session.query(export2020.COUNTRY_CODE, export2020.COUNTRY_NAME, export2020.DOMESTIC_FOREIGN_CODE, export2020.DISTRICT, export2020.DISTRICT_NAME, export2020.ALL_VALUES_MONTH, export2020.ALL_VALUES_YEAR, export2020.COMMODITY_DESCRIPTION, export2020.COMMODITY, export2020.YEAR, export2020.MONTH).all()
 
-#     session.close()
+    session.close()
 
-# @app.route("/import2019")
-# def import2019data():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-#     # Query all importexport data
-#     results = session.query(import2019.COUNTRY_NAME, import2019.COMMODITY, export2019).all()
-
-#     session.close()
-
-# @app.route("/import2020")
-# def import2020data():
-#     # Create our session (link) from Python to the DB
-#     session = Session(engine)
-
-#     # Query all importexport data
-#     results = session.query(import2020.COUNTRY_NAME, import2020.COMMODITY, export2019).all()
-
-#     session.close()
-
-    # Create a dictionary from row of data and append to a list of dictionaries
-    export2019_data = []
-    for COMMODITY, COUNTRY_NAME in results:
-        pizza_dict = {}
-        pizza_dict["month"] = month
-        pizza_dict["pizza"] = str(pizza)
-        pizzas_eaten.append(pizza_dict)
+#Create a dictionary from row of data and append to a list of dictionaries
+    export2020_data = []
+    for COUNTRY_CODE, COUNTRY_NAME, DOMESTIC_FOREIGN_CODE, DISTRICT, DISTRICT_NAME, ALL_VALUES_MONTH, ALL_VALUES_YEAR, COMMODITY_DESCRIPTION, COMMODITY, YEAR, MONTH in results:
+        export2020_dict = {}
+        export2020_dict["COUNTRY_CODE"] = COUNTRY_CODE
+        export2020_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        export2020_dict["DOMESTIC_FOREIGN_CODE"] = DOMESTIC_FOREIGN_CODE
+        export2020_dict["DISTRICT"] = DISTRICT
+        export2020_dict["DISTRICT_NAME"] = DISTRICT_NAME
+        export2020_dict["ALL_VALUES_MONTH"] = ALL_VALUES_MONTH
+        export2020_dict["ALL_VALUES_YEAR"] = ALL_VALUES_YEAR
+        export2020_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
+        export2020_dict["COMMODITY"] = COMMODITY
+        export2020_dict["YEAR"] = YEAR
+        export2020_dict["MONTH"] = MONTH
+        export2020_data.append(export2020_dict)
 
     # turn the list of dicts into an array of objects
-    return jsonify(pizzas_eaten)
+    return jsonify(export2020_data)
+
+@app.route("/import2019")
+def import2019data():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Query all importexport data
+    results = session.query(import2019.SUMMARY_LEVEL, import2019.SUMMARY_LEVEL_2, import2019.COUNTRY_CODE, import2019.COUNTRY_NAME, import2019.COUNTRY_SUBCODE, import2019.DISTRICT_NAME, import2019.COMMODITY, import2019.COMMODITY_DESCRIPTION, import2019.GENERAL_VALUES_MONTH, import2019.GENERAL_VALUES_YEAR, import2019.MONTHLY_CONSUMPTION_VALUE, import2019.YEARLY_CONSUMPTION_VALUE).all()
+    session.close()
+
+    #Create a dictionary from row of data and append to a list of dictionaries
+    import2019_data = []
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE in results:
+        import2019_dict = {}
+        import2019_dict["SUMMARY_LEVEL"] = SUMMARY_LEVEL
+        import2019_dict["SUMMARY_LEVEL_2"] = SUMMARY_LEVEL_2
+        import2019_dict["COUNTRY_CODE"] = COUNTRY_CODE
+        import2019_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        import2019_dict["COUNTRY_SUBCODE"] = COUNTRY_SUBCODE
+        import2019_dict["DISTRICT_NAME"] = DISTRICT_NAME
+        import2019_dict["COMMODITY"] = COMMODITY
+        import2019_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
+        import2019_dict["GENERAL_VALUES_MONTH"] = GENERAL_VALUES_MONTH
+        import2019_dict["GENERAL_VALUES_YEAR"] = GENERAL_VALUES_YEAR
+        import2019_dict["MONTHLY_CONSUMPTION_VALUE"] = MONTHLY_CONSUMPTION_VALUE
+        import2019_dict["YEARLY_CONSUMPTION_VALUE"] = YEARLY_CONSUMPTION_VALUE
+        import2019_data.append(import2019_dict)
+
+    return jsonify(import2019_data)
+    
+
+@app.route("/import2020")
+def import2020data():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Query all importexport data
+    results = session.query(import2020.SUMMARY_LEVEL, import2020.SUMMARY_LEVEL_2, import2020.COUNTRY_CODE, import2020.COUNTRY_NAME, import2020.COUNTRY_SUBCODE, import2020.DISTRICT_NAME, import2020.COMMODITY, import2020.COMMODITY_DESCRIPTION, import2020.GENERAL_VALUES_MONTH, import2020.GENERAL_VALUES_YEAR, import2020.MONTHLY_CONSUMPTION_VALUE, import2020.YEARLY_CONSUMPTION_VALUE).all()
+    session.close()
+
+    #Create a dictionary from row of data and append to a list of dictionaries
+    import2020_data = []
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE in results:
+        import2020_dict = {}
+        import2020_dict["SUMMARY_LEVEL"] = SUMMARY_LEVEL
+        import2020_dict["SUMMARY_LEVEL_2"] = SUMMARY_LEVEL_2
+        import2020_dict["COUNTRY_CODE"] = COUNTRY_CODE
+        import2020_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        import2020_dict["COUNTRY_SUBCODE"] = COUNTRY_SUBCODE
+        import2020_dict["DISTRICT_NAME"] = DISTRICT_NAME
+        import2020_dict["COMMODITY"] = COMMODITY
+        import2020_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
+        import2020_dict["GENERAL_VALUES_MONTH"] = GENERAL_VALUES_MONTH
+        import2020_dict["GENERAL_VALUES_YEAR"] = GENERAL_VALUES_YEAR
+        import2020_dict["MONTHLY_CONSUMPTION_VALUE"] = MONTHLY_CONSUMPTION_VALUE
+        import2020_dict["YEARLY_CONSUMPTION_VALUE"] = YEARLY_CONSUMPTION_VALUE
+        import2020_data.append(import2020_dict)
+
+    return jsonify(import2020_data)
 
 
 if __name__ == '__main__':
