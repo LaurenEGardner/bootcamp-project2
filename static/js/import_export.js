@@ -77,6 +77,7 @@ d3.json(url_e20).then(function (data) {
 
     });
 
+
     //printing links&nodes to see if it's working
     console.log(links)
     console.log(nodes)
@@ -86,6 +87,7 @@ d3.json(url_e20).then(function (data) {
         .key(function (d) { return d.name; })
         .object(graph.nodes));
 
+
     // loop through each link replacing the text with its index from node
     graph.links.forEach(function (d, i) {
         graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
@@ -93,10 +95,12 @@ d3.json(url_e20).then(function (data) {
     });
 
     // now loop through each nodes to make nodes an array of objects
+
     // rather than an array of strings
     graph.nodes.forEach(function (d, i) {
         graph.nodes[i] = { "name": d };
     });
+
 
     sankey
         .nodes(graph.nodes)
@@ -175,4 +179,5 @@ d3.json(url_e20).then(function (data) {
         sankey.relayout();
         link.attr("d", path);
     }
+
 })

@@ -24,6 +24,7 @@ export2019 = Base.classes.export2019
 export2020 = Base.classes.export2020
 import2019 = Base.classes.import2019
 import2020 = Base.classes.import2020
+covid2020 = Base.classes.covid2020
 
 #################################################
 # Flask Setup
@@ -160,6 +161,30 @@ def import2020data():
         import2020_data.append(import2020_dict)
 
     return jsonify(import2020_data)
+
+@app.route("/covid2020")
+def covid2020data():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Query all importexport data
+    results = session.query(covid2020.day, covid2020.state, covid2020.fips, covid2020.cases, covid2020.deaths, covid2020.year, covid2020.month).all()
+    session.close()
+
+    #Create a dictionary from row of data and append to a list of dictionaries
+    covid2020_data = []
+    for day, state, fips, cases, deaths, year, month in results:
+        covid2020_dict = {}
+        covid2020_dict["day"] = day
+        covid2020_dict["state"] = state
+        covid2020_dict["fips"] = fips
+        covid2020_dict["cases"] = cases
+        covid2020_dict["deaths"] = deaths
+        covid2020_dict["year"] = year
+        covid2020_dict["month"] = month
+        covid2020_data.append(covid2020_dict)
+
+    return jsonify(covid2020_data)
 
 
 if __name__ == '__main__':
