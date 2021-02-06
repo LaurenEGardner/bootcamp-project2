@@ -173,7 +173,7 @@ def covid2020data():
 
     #Create a dictionary from row of data and append to a list of dictionaries
     covid2020_data = []
-    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE in results:
+    for day, state, fips, cases, deaths, year, month in results:
         covid2020_dict = {}
         covid2020_dict["day"] = day
         covid2020_dict["state"] = state
