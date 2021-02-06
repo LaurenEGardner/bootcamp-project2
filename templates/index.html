@@ -2,14 +2,54 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Bootcamp Project 2</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Importing & Exporting PPE</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	</head>
 	<body>
 
+		<div class="container">
+			<div class="row">
+			  <div class="col-md-12 jumbotron text-center">
+				<h1>Importing & Exporting PPE in the Time of COVID</h1>
+				<p>Use the interactive charts below to explore the dataset</p>
+			  </div>
+			</div>
+			<div class="row">
+			  <div class="col-md-2">
+				<div class="well">
+				  <h5>PPE Product</h5>
+				  <select id="selPPE" onchange="optionChanged(this.value)"></select>
+				</div>
+			  </div>
+			  <div class="col-md-5">
+				<div id="distChange">
+					<p>Distribution change graphs (Q1) here.</p>
+				</div>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+				  <div class="sankey">
+					  <p>Sankey chart here.</p>
+				  </div>
+				</div>
+			  </div>
+			<div class="row">
+			  <div class="col-md-12">
+				<div id="covidTime">
+					<p>COVID time series here.</p>
+				</div>
+			  </div>
+			</div>
+		  </div>
+
 		<div class="chart"></div>
-		<div class="sankey"></div>
+		<!-- <div class="sankey"></div> -->
 		<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
 		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 		<!-- `url_for()` is a flask thing to find the location of the file -->
 		<script src="{{ url_for('static', filename='js/import_export.js') }}"></script>
 		<!-- Load the sankey.js function -->
