@@ -22,10 +22,10 @@ var sankey = d3.sankey()
     .size([width, height]);
 
 //url for export 2019
-url_e19 = "/export2019"
+url_e19 = "http://127.0.0.1:5000/export2019"
 
 //load the data
-d3.json(url).then(function (data) {
+d3.json(url_e19).then(function (data) {
     console.log(data);
 
     //set up graph in same style as original example but empty
