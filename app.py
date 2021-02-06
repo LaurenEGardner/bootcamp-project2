@@ -24,6 +24,7 @@ export2019 = Base.classes.export2019
 export2020 = Base.classes.export2020
 import2019 = Base.classes.import2019
 import2020 = Base.classes.import2020
+covid2020 = Base.classes.covid2020
 
 #################################################
 # Flask Setup
