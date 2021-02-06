@@ -161,6 +161,30 @@ def import2020data():
 
     return jsonify(import2020_data)
 
+@app.route("/covid2020")
+def covid2020data():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Query all importexport data
+    results = session.query(covid2020.day, covid2020.state, covid2020.fips, covid2020.cases, covid2020.deaths, covid2020.year, covid2020.month).all()
+    session.close()
+
+    #Create a dictionary from row of data and append to a list of dictionaries
+    covid2020_data = []
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE in results:
+        covid2020_dict = {}
+        covid2020_dict["day"] = day
+        covid2020_dict["state"] = state
+        covid2020_dict["fips"] = fips
+        covid2020_dict["cases"] = cases
+        covid2020_dict["deaths"] = deaths
+        covid2020_dict["year"] = year
+        covid2020_dict["month"] = month
+        covid2020_data.append(covid2020_dict)
+
+    return jsonify(covid2020_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
