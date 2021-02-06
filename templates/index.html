@@ -7,9 +7,12 @@
 	<body>
 
 		<div class="chart"></div>
+		<div class="sankey"></div>
 		<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<!-- `url_for()` is a flask thing to find the location of the file -->
-        <script src="{{ url_for('static', filename='js/import_export.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/import_export.js') }}"></script>
+		<!-- Load the sankey.js function -->
+		<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
   </body>
 </html>
