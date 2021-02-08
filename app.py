@@ -55,6 +55,8 @@ def export2019data(productCode):
     if productCode != '0':
         results = results.filter(export2019.COMMODITY == productCode)
 
+    results = results.all()
+
     session.close()
 
 #Create a dictionary from row of data and append to a list of dictionaries
@@ -91,6 +93,8 @@ def export2020data(productCode):
     if productCode != '0':
         results = results.filter(export2020.COMMODITY == productCode)
 
+    results = results.all()
+
     session.close()
 
 #Create a dictionary from row of data and append to a list of dictionaries
@@ -125,6 +129,8 @@ def import2019data(productCode):
     # If a user requested a code of 0, it would return all results
     if productCode != '0':
         results = results.filter(import2019.COMMODITY == productCode)
+
+    results = results.all()
     
     session.close()
 
@@ -161,6 +167,8 @@ def import2020data(productCode):
     # If a user requested a code of 0, it would return all results
     if productCode != '0':
         results = results.filter(import2020.COMMODITY == productCode)
+
+    results = results.all()
     
     session.close()
 
@@ -184,13 +192,20 @@ def import2020data(productCode):
 
     return jsonify(import2020_data)
 
-@app.route("/covid2020")
-def covid2020data():
+@app.route("/covid2020/<state>")
+def covid2020data(state):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(covid2020.day, covid2020.state, covid2020.fips, covid2020.cases, covid2020.deaths, covid2020.year, covid2020.month).all()
+    results = session.query(covid2020.day, covid2020.state, covid2020.fips, covid2020.cases, covid2020.deaths, covid2020.year, covid2020.month)
+    
+    # Add filter by state
+    if state != 'all':
+        results = results.filter(covid2020.state == state)
+
+    results = results.all()
+
     session.close()
 
     #Create a dictionary from row of data and append to a list of dictionaries
