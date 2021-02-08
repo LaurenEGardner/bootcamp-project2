@@ -123,7 +123,7 @@ def import2019data(productCode):
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(import2019.SUMMARY_LEVEL, import2019.SUMMARY_LEVEL_2, import2019.COUNTRY_CODE, import2019.COUNTRY_NAME, import2019.COUNTRY_SUBCODE, import2019.DISTRICT_NAME, import2019.COMMODITY, import2019.COMMODITY_DESCRIPTION, import2019.GENERAL_VALUES_MONTH, import2019.GENERAL_VALUES_YEAR, import2019.MONTHLY_CONSUMPTION_VALUE, import2019.YEARLY_CONSUMPTION_VALUE)
+    results = session.query(import2019.SUMMARY_LEVEL, import2019.SUMMARY_LEVEL_2, import2019.COUNTRY_CODE, import2019.COUNTRY_NAME, import2019.COUNTRY_SUBCODE, import2019.DISTRICT_NAME, import2019.COMMODITY, import2019.COMMODITY_DESCRIPTION, import2019.GENERAL_VALUES_MONTH, import2019.GENERAL_VALUES_YEAR, import2019.MONTHLY_CONSUMPTION_VALUE, import2019.YEARLY_CONSUMPTION_VALUE, import2019.YEAR, import2019.MONTH)
     
     # Filter by product 
     # If a user requested a code of 0, it would return all results
@@ -136,7 +136,7 @@ def import2019data(productCode):
 
     #Create a dictionary from row of data and append to a list of dictionaries
     import2019_data = []
-    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE in results:
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE, YEAR, MONTH in results:
         import2019_dict = {}
         import2019_dict["SUMMARY_LEVEL"] = SUMMARY_LEVEL
         import2019_dict["SUMMARY_LEVEL_2"] = SUMMARY_LEVEL_2
@@ -150,6 +150,8 @@ def import2019data(productCode):
         import2019_dict["GENERAL_VALUES_YEAR"] = GENERAL_VALUES_YEAR
         import2019_dict["MONTHLY_CONSUMPTION_VALUE"] = MONTHLY_CONSUMPTION_VALUE
         import2019_dict["YEARLY_CONSUMPTION_VALUE"] = YEARLY_CONSUMPTION_VALUE
+        import2019_dict["YEAR"] = YEAR
+        import2019_dict["MONTH"] = MONTH
         import2019_data.append(import2019_dict)
 
     return jsonify(import2019_data)
@@ -161,7 +163,7 @@ def import2020data(productCode):
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(import2020.SUMMARY_LEVEL, import2020.SUMMARY_LEVEL_2, import2020.COUNTRY_CODE, import2020.COUNTRY_NAME, import2020.COUNTRY_SUBCODE, import2020.DISTRICT_NAME, import2020.COMMODITY, import2020.COMMODITY_DESCRIPTION, import2020.GENERAL_VALUES_MONTH, import2020.GENERAL_VALUES_YEAR, import2020.MONTHLY_CONSUMPTION_VALUE, import2020.YEARLY_CONSUMPTION_VALUE)
+    results = session.query(import2020.SUMMARY_LEVEL, import2020.SUMMARY_LEVEL_2, import2020.COUNTRY_CODE, import2020.COUNTRY_NAME, import2020.COUNTRY_SUBCODE, import2020.DISTRICT_NAME, import2020.COMMODITY, import2020.COMMODITY_DESCRIPTION, import2020.GENERAL_VALUES_MONTH, import2020.GENERAL_VALUES_YEAR, import2020.MONTHLY_CONSUMPTION_VALUE, import2020.YEARLY_CONSUMPTION_VALUE, import2020.YEAR, import2020.MONTH)
     
     # Filter by product 
     # If a user requested a code of 0, it would return all results
@@ -174,7 +176,7 @@ def import2020data(productCode):
 
     #Create a dictionary from row of data and append to a list of dictionaries
     import2020_data = []
-    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE in results:
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE, YEAR, MONTH in results:
         import2020_dict = {}
         import2020_dict["SUMMARY_LEVEL"] = SUMMARY_LEVEL
         import2020_dict["SUMMARY_LEVEL_2"] = SUMMARY_LEVEL_2
@@ -188,6 +190,8 @@ def import2020data(productCode):
         import2020_dict["GENERAL_VALUES_YEAR"] = GENERAL_VALUES_YEAR
         import2020_dict["MONTHLY_CONSUMPTION_VALUE"] = MONTHLY_CONSUMPTION_VALUE
         import2020_dict["YEARLY_CONSUMPTION_VALUE"] = YEARLY_CONSUMPTION_VALUE
+        import2020_dict["YEAR"] = YEAR
+        import2020_dict["MONTH"] = MONTH
         import2020_data.append(import2020_dict)
 
     return jsonify(import2020_data)

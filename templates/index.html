@@ -20,7 +20,7 @@
 			  <div class="col-md-2">
 				<div class="well">
 				  <h5>PPE Product</h5>
-				  <select id="selPPE" onchange="optionChanged(this.value)"></select>
+				  <select id="selPPE" onchange="ppeOptionChanged(this.value)"></select>
 				</div>
 			  </div>
 			  <div class="col-md-5">
@@ -37,9 +37,15 @@
 				</div>
 			  </div>
 			<div class="row">
-			  <div class="col-md-12">
-				<div id="covidTime">
-					<p>COVID time series here.</p>
+			  <div class="col-md-2">
+				<div class="well">
+				  <h5>PPE Data</h5>
+				  <select id="selPPE" onchange="ppeOptionChanged(this.value)"></select>
+				</div>
+			  </div>
+			  <div class="col-md-5">
+				<div id="distChange">
+					<p>Distribution change graphs (Q1) here.</p>
 				</div>
 			  </div>
 			</div>
