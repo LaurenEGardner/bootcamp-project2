@@ -20,6 +20,10 @@ function init() {
     var dropdown = ds.select("selPPE");
 
     // Figure out how to populate dropdown with unique values from data.
-
+    d3.json("127.0.0.1:5000/covid2020").then((data) => {
+        console.log(data);
+    })
 
 }
+
+init();
