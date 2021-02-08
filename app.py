@@ -42,13 +42,18 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/export2019")
-def export2019data():
+@app.route("/export2019/<productCode>")
+def export2019data(productCode):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(export2019.COUNTRY_CODE, export2019.COUNTRY_NAME, export2019.DOMESTIC_FOREIGN_CODE, export2019.DISTRICT, export2019.DISTRICT_NAME, export2019.ALL_VALUES_MONTH, export2019.ALL_VALUES_YEAR, export2019.COMMODITY_DESCRIPTION, export2019.COMMODITY, export2019.YEAR, export2019.MONTH).all()
+    results = session.query(export2019.COUNTRY_CODE, export2019.COUNTRY_NAME, export2019.DOMESTIC_FOREIGN_CODE, export2019.DISTRICT, export2019.DISTRICT_NAME, export2019.ALL_VALUES_MONTH, export2019.ALL_VALUES_YEAR, export2019.COMMODITY_DESCRIPTION, export2019.COMMODITY, export2019.YEAR, export2019.MONTH)
+
+    # Filter by product 
+    # If a user requested a code of 0, it would return all results
+    if productCode != '0':
+        results = results.filter(export2019.COMMODITY == productCode)
 
     session.close()
 
@@ -73,13 +78,18 @@ def export2019data():
     return jsonify(export2019_data)
     
 
-@app.route("/export2020")
-def export2020data():
+@app.route("/export2020/<productCode>")
+def export2020data(productCode):
 #     # Create our session (link) from Python to the DB
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(export2020.COUNTRY_CODE, export2020.COUNTRY_NAME, export2020.DOMESTIC_FOREIGN_CODE, export2020.DISTRICT, export2020.DISTRICT_NAME, export2020.ALL_VALUES_MONTH, export2020.ALL_VALUES_YEAR, export2020.COMMODITY_DESCRIPTION, export2020.COMMODITY, export2020.YEAR, export2020.MONTH).all()
+    results = session.query(export2020.COUNTRY_CODE, export2020.COUNTRY_NAME, export2020.DOMESTIC_FOREIGN_CODE, export2020.DISTRICT, export2020.DISTRICT_NAME, export2020.ALL_VALUES_MONTH, export2020.ALL_VALUES_YEAR, export2020.COMMODITY_DESCRIPTION, export2020.COMMODITY, export2020.YEAR, export2020.MONTH)
+
+    # Filter by product 
+    # If a user requested a code of 0, it would return all results
+    if productCode != '0':
+        results = results.filter(export2019.COMMODITY == productCode)
 
     session.close()
 
@@ -103,13 +113,19 @@ def export2020data():
     # turn the list of dicts into an array of objects
     return jsonify(export2020_data)
 
-@app.route("/import2019")
-def import2019data():
+@app.route("/import2019/<productCode>")
+def import2019data(productCode):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
     # Query all importexport data
     results = session.query(import2019.SUMMARY_LEVEL, import2019.SUMMARY_LEVEL_2, import2019.COUNTRY_CODE, import2019.COUNTRY_NAME, import2019.COUNTRY_SUBCODE, import2019.DISTRICT_NAME, import2019.COMMODITY, import2019.COMMODITY_DESCRIPTION, import2019.GENERAL_VALUES_MONTH, import2019.GENERAL_VALUES_YEAR, import2019.MONTHLY_CONSUMPTION_VALUE, import2019.YEARLY_CONSUMPTION_VALUE).all()
+    
+    # Filter by product 
+    # If a user requested a code of 0, it would return all results
+    if productCode != '0':
+        results = results.filter(export2019.COMMODITY == productCode)
+
     session.close()
 
     #Create a dictionary from row of data and append to a list of dictionaries
@@ -133,8 +149,8 @@ def import2019data():
     return jsonify(import2019_data)
     
 
-@app.route("/import2020")
-def import2020data():
+@app.route("/import2020/<productCode>")
+def import2020data(productCode):
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
