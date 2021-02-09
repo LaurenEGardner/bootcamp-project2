@@ -30,11 +30,16 @@ function init() {
 
     // Populate drop down
     var dropdown = d3.select("#selProduct");
-    var productOptions = ["One", "Two", "Three"];
+    var productOptions = {"One": 1, "Two": 2, "Three": 3};
+    var productNames = Object.keys(productOptions);
+    var productValues = Object.values(productOptions);
 
-    productOptions.forEach(function(product) {
-        dropdown.append("option").text(product).property("value");
-    })
+    // var menuOptions = menuOptions.selectAll("option")
+    //                     .data(productOptions)
+    //                     .enter()
+    //                     .append("option")
+    //                     .attr("value", function (d) {return d.value;})
+    //                     .text(function (d) {return})
 
     // Build chart with default info
     buildTimeChart(productOptions[0], radio);
