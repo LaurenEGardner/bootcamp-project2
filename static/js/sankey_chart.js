@@ -22,10 +22,14 @@ var sankey = d3.sankey()
     .nodePadding(290)
     .size([width, height]);
 
+// function to return only unique values in a list
+// const manyNames = ["abbie", "delilah", "sue", "abbie"]
+// const nameSet = new Set(manyNames)
+// const names = [...nameSet]
+// console.log(names);
 
 //url for acrylonitrile export 2020
-
-url_e20 = "http://127.0.0.1:5000/export2020/2926100000"
+var url_e20 = "http://127.0.0.1:5000/export2020/2926100000"
 
 //load the data
 d3.json(url_e20).then(function (data) {
@@ -33,7 +37,7 @@ d3.json(url_e20).then(function (data) {
 
     //set up graph in same style as original example but empty
 
-    nodes = [] //a list of each unique DISTRICT_NAME & COUNTRY_NAME
+    allNodes = [] //a list of all DISTRICT_NAME & COUNTRY_NAME
     links = [] //a list of objects export:{source:DISTRICT_NAME, target: COUNTRY_NAME, value: +=ALL_VALUES_MONTH(cumulative)}
     //import:{source:COUNTRY_NAME, target: DISTRICT_NAME, value: +=MONTHLY_CONSUMPTION_VALUE(cumulative)}
 
@@ -43,26 +47,12 @@ d3.json(url_e20).then(function (data) {
         var found = false;
         var found2 = false;
         var found3 = false;
-        //check if district name is in the nodes list, if not, add it
-        for (index in nodes) {
-            if (nodes[index].DISTRICT_NAME === d.DISTRICT_NAME) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            nodes.push({ "name": d.DISTRICT_NAME });
-        }
-        //check if country name is in the nodes list, if not, add it
-        for (index in nodes) {
-            if (nodes[index].COUNTRY_NAME === d.COUNTRY_NAME) {
-                found2 = true;
-                break;
-            }
-        }
-        if (!found) {
-            nodes.push({ "name": d.COUNTRY_NAME });
-        }
+        //add district name to list
+        allNodes.push({ "name": d.DISTRICT_NAME });
+
+        //add country name to list
+        allNodes.push({ "name": d.COUNTRY_NAME });
+
         //check if source is in the link list, if not, add it. If so, add to monthly total
         for (index in links) {
             if (links[index].source === d.DISTRICT_NAME) {
@@ -80,7 +70,9 @@ d3.json(url_e20).then(function (data) {
         }
 
     });
-
+    console.log(allNodes);
+    const nodeSet = new Set(allNodes)
+    const nodes = [...nodeSet]
 
     //printing links&nodes to see if it's working
     console.log(links)
