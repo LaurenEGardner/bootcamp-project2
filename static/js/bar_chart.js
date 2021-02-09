@@ -20,8 +20,10 @@ var svg = d3.select("#distChange")
 url_e19 = "http://127.0.0.1:5000/export2019/0"
 
 // read in json files
+var e19_data={}
 d3.json(url_e19).then(function(data){
         console.log(data);
+        // e19_data = data})
 
         var e19 = d3.nest()
             .key(function(d){return d.COMMODITY_DESCRIPTION;})
