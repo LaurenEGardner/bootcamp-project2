@@ -65,6 +65,9 @@ def export2019data(productCode):
         export2019_dict = {}
         export2019_dict["COUNTRY_CODE"] = COUNTRY_CODE
         export2019_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        export2019_dict["INT_LAT"] = INT_LAT
+        export2019_dict["INT_LNG"] = INT_LNG
+        export2019_dict["INT_LAT_LNG"] = INT_LAT_LNG
         export2019_dict["DOMESTIC_FOREIGN_CODE"] = DOMESTIC_FOREIGN_CODE
         export2019_dict["DISTRICT"] = DISTRICT
         export2019_dict["DISTRICT_NAME"] = DISTRICT_NAME
@@ -103,6 +106,9 @@ def export2020data(productCode):
         export2020_dict = {}
         export2020_dict["COUNTRY_CODE"] = COUNTRY_CODE
         export2020_dict["COUNTRY_NAME"] = COUNTRY_NAME
+        export2020_dict["INT_LAT"] = INT_LAT
+        export2020_dict["INT_LNG"] = INT_LNG
+        export2020_dict["INT_LAT_LNG"] = INT_LAT_LNG
         export2020_dict["DOMESTIC_FOREIGN_CODE"] = DOMESTIC_FOREIGN_CODE
         export2020_dict["DISTRICT"] = DISTRICT
         export2020_dict["DISTRICT_NAME"] = DISTRICT_NAME
@@ -143,6 +149,9 @@ def import2019data(productCode):
         import2019_dict["COUNTRY_CODE"] = COUNTRY_CODE
         import2019_dict["COUNTRY_NAME"] = COUNTRY_NAME
         import2019_dict["COUNTRY_SUBCODE"] = COUNTRY_SUBCODE
+        import2019_dict["INT_LAT"] = INT_LAT
+        import2019_dict["INT_LNG"] = INT_LNG
+        import2019_dict["INT_LAT_LNG"] = INT_LAT_LNG
         import2019_dict["DISTRICT_NAME"] = DISTRICT_NAME
         import2019_dict["COMMODITY"] = COMMODITY
         import2019_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
@@ -183,6 +192,9 @@ def import2020data(productCode):
         import2020_dict["COUNTRY_CODE"] = COUNTRY_CODE
         import2020_dict["COUNTRY_NAME"] = COUNTRY_NAME
         import2020_dict["COUNTRY_SUBCODE"] = COUNTRY_SUBCODE
+        import2020_dict["INT_LAT"] = INT_LAT
+        import2020_dict["INT_LNG"] = INT_LNG
+        import2020_dict["INT_LAT_LNG"] = INT_LAT_LNG
         import2020_dict["DISTRICT_NAME"] = DISTRICT_NAME
         import2020_dict["COMMODITY"] = COMMODITY
         import2020_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
