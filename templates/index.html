@@ -39,13 +39,20 @@
 			<div class="row">
 			  <div class="col-md-2">
 				<div class="well">
-				  <h5>PPE Data</h5>
-				  <select id="selPPE" onchange="ppeOptionChanged(this.value)"></select>
+				  <h4>Import/Export Data</h4>
+				  <p>Choose to view import or export data.</p>
+				  <input type="radio" id="import" name="infoType" onchange="infoTypeChanged()" value="import" checked>
+				  <label for="import">Import</label><br>
+				  <input type="radio" id="export" name="infoType" onchange="infoTypeChanged()" value="export">
+				  <label for="export">Export</label><br>
+				  <p>Select a type of product.</p>
+				  <label for="selProduct">Product: </label>
+				  <select id="selProduct" onchange="productChanged(this.value)"></select>
 				</div>
 			  </div>
 			  <div class="col-md-5">
-				<div id="distChange">
-					<p>Distribution change graphs (Q1) here.</p>
+				<div id="covidInfo">
+					<p>Time Series</p>
 				</div>
 			  </div>
 			</div>
