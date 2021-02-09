@@ -1,3 +1,4 @@
+
 //working on sankey
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 10, bottom: 10, left: 10 },
@@ -21,7 +22,9 @@ var sankey = d3.sankey()
     .nodePadding(290)
     .size([width, height]);
 
+
 //url for acrylonitrile export 2020
+
 url_e20 = "http://127.0.0.1:5000/export2020/2926100000"
 
 //load the data
@@ -180,5 +183,5 @@ d3.json(url_e20).then(function (data) {
         sankey.relayout();
         link.attr("d", path);
     }
-
 })
+
