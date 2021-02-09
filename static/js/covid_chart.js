@@ -13,15 +13,60 @@ function infoTypeChanged() {
 // Function to build the time series chart for the selected product
 function buildTimeChart(product, infoType) {
     console.log(product, infoType);
+    console.log(product, infoType);
     // Create variables to save the data to
-
+    var covidData = {};
+    var impExpData = {};
     // Read in COVID data and save to variables
-
+    d3.json("/covid2020/Washington").then((data) => {
+        console.log(data);
+        covidData = data;
+    });
     // Read in Product data and save to variables
+    if (infoType == "export") {
+        d3.json("/export2020/2926100000").then((data) => {
+            console.log(data);
+            impExpData = data;
+        });
+    } else {
+        d3.json("/import2020/3926201010").then((data) => {
+            console.log(data);
+            impExpData = data;
+        });
+    }
 
     // Create traces and layout
-
-    // Build time series chart
+    var trace1 = {
+        x: [1, 2, 3],
+        y: [40, 50, 60],
+        name: 'yaxis data',
+        type: 'scatter'
+      };
+      
+      var trace2 = {
+        x: [2, 3, 4],
+        y: [4, 5, 6],
+        name: 'yaxis2 data',
+        yaxis: 'y2',
+        type: 'scatter'
+      };
+      
+      var data = [trace1, trace2];
+      
+      var layout = {
+        title: 'Double Y Axis Example',
+        yaxis: {title: 'yaxis title'},
+        yaxis2: {
+          title: 'yaxis2 title',
+          titlefont: {color: 'rgb(148, 103, 189)'},
+          tickfont: {color: 'rgb(148, 103, 189)'},
+          overlaying: 'y',
+          side: 'right'
+        }
+      };
+      
+      // Build time series chart
+      Plotly.newPlot('covidInfo', data, layout);
 }
 
 function init() {
