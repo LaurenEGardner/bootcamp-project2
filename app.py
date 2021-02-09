@@ -48,7 +48,7 @@ def export2019data(productCode):
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(export2019.COUNTRY_CODE, export2019.COUNTRY_NAME, export2019.INT_LAT, export2019.INT_LNG, export2019.INT_LAT_LNG, export2019.DOMESTIC_FOREIGN_CODE, export2019.DISTRICT, export2019.DISTRICT_NAME, export2019.ALL_VALUES_MONTH, export2019.ALL_VALUES_YEAR, export2019.COMMODITY_DESCRIPTION, export2019.COMMODITY, export2019.YEAR, export2019.MONTH, export2019.ZIP, export2019.US_LAT, export2019.US_LNG, export2019.CITY, export2019.STATE_ID, export2019.STATE, export2019.POPULATION, export2019.COUNTRY_FIPS, export2019.US_LAT_LONG)
+    results = session.query(export2019.COUNTRY_CODE, export2019.COUNTRY_NAME, export2019.INT_LAT, export2019.INT_LNG, export2019.INT_LAT_LNG, export2019.DOMESTIC_FOREIGN_CODE, export2019.DISTRICT, export2019.DISTRICT_NAME, export2019.ALL_VALUES_MONTH, export2019.ALL_VALUES_YEAR, export2019.COMMODITY_DESCRIPTION, export2019.COMMODITY, export2019.YEAR, export2019.MONTH, export2019.ZIP, export2019.US_LAT, export2019.US_LONG, export2019.CITY, export2019.STATE_ID, export2019.STATE, export2019.POPULATION, export2019.US_LAT_LONG)
 
     # Filter by product 
     # If a user requested a code of 0, it would return all results
@@ -61,7 +61,7 @@ def export2019data(productCode):
 
 #Create a dictionary from row of data and append to a list of dictionaries
     export2019_data = []
-    for COUNTRY_CODE, COUNTRY_NAME, INT_LAT, INT_LNG, INT_LAT_LNG, DOMESTIC_FOREIGN_CODE, DISTRICT, DISTRICT_NAME, ALL_VALUES_MONTH, ALL_VALUES_YEAR, COMMODITY_DESCRIPTION, COMMODITY, YEAR, MONTH, ZIP, US_LAT, US_LNG, CITY, STATE_ID, STATE, POPULATION, COUNTRY_FIPS, US_LAT_LONG in results:
+    for COUNTRY_CODE, COUNTRY_NAME, INT_LAT, INT_LNG, INT_LAT_LNG, DOMESTIC_FOREIGN_CODE, DISTRICT, DISTRICT_NAME, ALL_VALUES_MONTH, ALL_VALUES_YEAR, COMMODITY_DESCRIPTION, COMMODITY, YEAR, MONTH, ZIP, US_LAT, US_LONG, CITY, STATE_ID, STATE, POPULATION, US_LAT_LONG in results:
         export2019_dict = {}
         export2019_dict["COUNTRY_CODE"] = COUNTRY_CODE
         export2019_dict["COUNTRY_NAME"] = COUNTRY_NAME
@@ -79,12 +79,11 @@ def export2019data(productCode):
         export2019_dict["MONTH"] = MONTH
         export2019_dict["ZIP"] = ZIP
         export2019_dict["US_LAT"] = US_LAT
-        export2019_dict["US_LNG"] = US_LNG
+        export2019_dict["US_LNG"] = US_LONG
         export2019_dict["CITY"] = CITY
         export2019_dict["STATE_ID"] = STATE_ID
         export2019_dict["STATE"] = STATE
         export2019_dict["POPULATION"] = POPULATION
-        export2019_dict["COUNTRTY_FIPS"] = COUNTRY_FIPS
         export2019_dict["US_LAT_LONG"] = US_LAT_LONG
         export2019_data.append(export2019_dict)
 
@@ -98,7 +97,7 @@ def export2020data(productCode):
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(export2020.COUNTRY_CODE, export2020.COUNTRY_NAME, export2020.INT_LAT, export2020.INT_LNG, export2020.INT_LAT_LNG, export2020.DOMESTIC_FOREIGN_CODE, export2020.DISTRICT, export2020.DISTRICT_NAME, export2020.ALL_VALUES_MONTH, export2020.ALL_VALUES_YEAR, export2020.COMMODITY_DESCRIPTION, export2020.COMMODITY, export2020.YEAR, export2020.MONTH, export2020.ZIP, export2020.US_LAT, export2020.US_LNG, export2020.CITY, export2020.STATE_ID, export2020.STATE, export2020.POPULATION, export2020.COUNTRY_FIPS, export2020.US_LAT_LONG)
+    results = session.query(export2020.COUNTRY_CODE, export2020.COUNTRY_NAME, export2020.INT_LAT, export2020.INT_LNG, export2020.INT_LAT_LNG, export2020.DOMESTIC_FOREIGN_CODE, export2020.DISTRICT, export2020.DISTRICT_NAME, export2020.ALL_VALUES_MONTH, export2020.ALL_VALUES_YEAR, export2020.COMMODITY_DESCRIPTION, export2020.COMMODITY, export2020.YEAR, export2020.MONTH, export2020.ZIP, export2020.US_LAT, export2020.US_LONG, export2020.CITY, export2020.STATE_ID, export2020.STATE, export2020.POPULATION, export2020.COUNTRY_FIPS, export2020.US_LAT_LONG)
 
     # Filter by product 
     # If a user requested a code of 0, it would return all results
@@ -111,7 +110,7 @@ def export2020data(productCode):
 
 #Create a dictionary from row of data and append to a list of dictionaries
     export2020_data = []
-    for COUNTRY_CODE, COUNTRY_NAME, INT_LAT, INT_LNG, INT_LAT_LNG, DOMESTIC_FOREIGN_CODE, DISTRICT, DISTRICT_NAME, ALL_VALUES_MONTH, ALL_VALUES_YEAR, COMMODITY_DESCRIPTION, COMMODITY, YEAR, MONTH, ZIP, US_LAT, US_LNG, CITY, STATE_ID, STATE, POPULATION, COUNTRY_FIPS, US_LAT_LONG in results:
+    for COUNTRY_CODE, COUNTRY_NAME, INT_LAT, INT_LNG, INT_LAT_LNG, DOMESTIC_FOREIGN_CODE, DISTRICT, DISTRICT_NAME, ALL_VALUES_MONTH, ALL_VALUES_YEAR, COMMODITY_DESCRIPTION, COMMODITY, YEAR, MONTH, ZIP, US_LAT, US_LONG, CITY, STATE_ID, STATE, POPULATION, US_LAT_LONG in results:
         export2020_dict = {}
         export2020_dict["COUNTRY_CODE"] = COUNTRY_CODE
         export2020_dict["COUNTRY_NAME"] = COUNTRY_NAME
@@ -129,12 +128,11 @@ def export2020data(productCode):
         export2020_dict["MONTH"] = MONTH
         export2020_dict["ZIP"] = ZIP
         export2020_dict["US_LAT"] = US_LAT
-        export2020_dict["US_LNG"] = US_LNG
+        export2020_dict["US_LNG"] = US_LONG
         export2020_dict["CITY"] = CITY
         export2020_dict["STATE_ID"] = STATE_ID
         export2020_dict["STATE"] = STATE
         export2020_dict["POPULATION"] = POPULATION
-        export2020_dict["COUNTRTY_FIPS"] = COUNTRY_FIPS
         export2020_dict["US_LAT_LONG"] = US_LAT_LONG
         export2020_data.append(export2020_dict)
 
@@ -147,7 +145,7 @@ def import2019data(productCode):
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(import2019.SUMMARY_LEVEL, import2019.SUMMARY_LEVEL_2, import2019.COUNTRY_CODE, import2019.COUNTRY_NAME, import2019.COUNTRY_SUBCODE, import2019.INT_LAT, import2019.INT_LNG, import2019.INT_LAT_LNG, import2019.DISTRICT_NAME, import2019.COMMODITY, import2019.COMMODITY_DESCRIPTION, import2019.GENERAL_VALUES_MONTH, import2019.GENERAL_VALUES_YEAR, import2019.MONTHLY_CONSUMPTION_VALUE, import2019.YEARLY_CONSUMPTION_VALUE, import2019.YEAR, import2019.MONTH, import2019.ZIP, import2019.US_LAT, import2019.US_LNG, import2019.CITY, import2019.STATE_ID, import2019.STATE, import2019.POPULATION, import2019.COUNTRY_FIPS, import2019.US_LAT_LONG)
+    results = session.query(import2019.SUMMARY_LEVEL, import2019.SUMMARY_LEVEL_2, import2019.COUNTRY_CODE, import2019.COUNTRY_NAME, import2019.COUNTRY_SUBCODE, import2019.INT_LAT, import2019.INT_LNG, import2019.INT_LAT_LNG, import2019.DISTRICT_NAME, import2019.COMMODITY, import2019.COMMODITY_DESCRIPTION, import2019.GENERAL_VALUES_MONTH, import2019.GENERAL_VALUES_YEAR, import2019.MONTHLY_CONSUMPTION_VALUE, import2019.YEARLY_CONSUMPTION_VALUE, import2019.YEAR, import2019.MONTH, import2019.ZIP, import2019.US_LAT, import2019.US_LONG, import2019.CITY, import2019.STATE_ID, import2019.STATE, import2019.POPULATION, import2019.COUNTRY_FIPS, import2019.US_LAT_LONG)
     
     # Filter by product 
     # If a user requested a code of 0, it would return all results
@@ -160,7 +158,7 @@ def import2019data(productCode):
 
     #Create a dictionary from row of data and append to a list of dictionaries
     import2019_data = []
-    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, INT_LAT, INT_LNG, INT_LAT_LNG, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE, YEAR, MONTH, ZIP, US_LAT, US_LNG, CITY, STATE_ID, STATE, POPULATION, COUNTRY_FIPS, US_LAT_LONG in results:
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, INT_LAT, INT_LNG, INT_LAT_LNG, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE, YEAR, MONTH, ZIP, US_LAT, US_LONG, CITY, STATE_ID, STATE, POPULATION, US_LAT_LONG in results:
         import2019_dict = {}
         import2019_dict["SUMMARY_LEVEL"] = SUMMARY_LEVEL
         import2019_dict["SUMMARY_LEVEL_2"] = SUMMARY_LEVEL_2
@@ -181,12 +179,11 @@ def import2019data(productCode):
         import2019_dict["MONTH"] = MONTH
         import2019_dict["ZIP"] = ZIP
         import2019_dict["US_LAT"] = US_LAT
-        import2019_dict["US_LNG"] = US_LNG
+        import2019_dict["US_LNG"] = US_LONG
         import2019_dict["CITY"] = CITY
         import2019_dict["STATE_ID"] = STATE_ID
         import2019_dict["STATE"] = STATE
         import2019_dict["POPULATION"] = POPULATION
-        import2019_dict["COUNTRTY_FIPS"] = COUNTRY_FIPS
         import2019_dict["US_LAT_LONG"] = US_LAT_LONG
         import2019_data.append(import2019_dict)
 
@@ -199,7 +196,7 @@ def import2020data(productCode):
     session = Session(engine)
 
     # Query all importexport data
-    results = session.query(import2020.SUMMARY_LEVEL, import2020.SUMMARY_LEVEL_2, import2020.COUNTRY_CODE, import2020.COUNTRY_NAME, import2020.COUNTRY_SUBCODE, import2020.INT_LAT, import2020.INT_LNG, import2020.INT_LAT_LNG, import2020.DISTRICT_NAME, import2020.COMMODITY, import2020.COMMODITY_DESCRIPTION, import2020.GENERAL_VALUES_MONTH, import2020.GENERAL_VALUES_YEAR, import2020.MONTHLY_CONSUMPTION_VALUE, import2020.YEARLY_CONSUMPTION_VALUE, import2020.YEAR, import2020.MONTH, import2020.ZIP, import2020.US_LAT, import2020.US_LNG, import2020.CITY, import2020.STATE_ID, import20120.STATE, import2020.POPULATION, import2020.COUNTRY_FIPS, import2020.US_LAT_LONG)
+    results = session.query(import2020.SUMMARY_LEVEL, import2020.SUMMARY_LEVEL_2, import2020.COUNTRY_CODE, import2020.COUNTRY_NAME, import2020.COUNTRY_SUBCODE, import2020.INT_LAT, import2020.INT_LNG, import2020.INT_LAT_LNG, import2020.DISTRICT_NAME, import2020.COMMODITY, import2020.COMMODITY_DESCRIPTION, import2020.GENERAL_VALUES_MONTH, import2020.GENERAL_VALUES_YEAR, import2020.MONTHLY_CONSUMPTION_VALUE, import2020.YEARLY_CONSUMPTION_VALUE, import2020.YEAR, import2020.MONTH, import2020.ZIP, import2020.US_LAT, import2020.US_LONG, import2020.CITY, import2020.STATE_ID, import20120.STATE, import2020.POPULATION, import2020.US_LAT_LONG)
     
     # Filter by product 
     # If a user requested a code of 0, it would return all results
@@ -212,7 +209,7 @@ def import2020data(productCode):
 
     #Create a dictionary from row of data and append to a list of dictionaries
     import2020_data = []
-    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, INT_LAT, INT_LNG, INT_LAT_LNG, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE, YEAR, MONTH, ZIP, US_LAT, US_LNG, CITY, STATE_ID, STATE, POPULATION, COUNTRY_FIPS, US_LAT_LONG in results:
+    for SUMMARY_LEVEL, SUMMARY_LEVEL_2, COUNTRY_CODE, COUNTRY_NAME, COUNTRY_SUBCODE, INT_LAT, INT_LNG, INT_LAT_LNG, DISTRICT_NAME, COMMODITY, COMMODITY_DESCRIPTION, GENERAL_VALUES_MONTH, GENERAL_VALUES_YEAR, MONTHLY_CONSUMPTION_VALUE, YEARLY_CONSUMPTION_VALUE, YEAR, MONTH, ZIP, US_LAT, US_LONG, CITY, STATE_ID, STATE, POPULATION, US_LAT_LONG in results:
         import2020_dict = {}
         import2020_dict["SUMMARY_LEVEL"] = SUMMARY_LEVEL
         import2020_dict["SUMMARY_LEVEL_2"] = SUMMARY_LEVEL_2
@@ -233,12 +230,11 @@ def import2020data(productCode):
         import2020_dict["MONTH"] = MONTH
         import2020_dict["ZIP"] = ZIP
         import2020_dict["US_LAT"] = US_LAT
-        import2020_dict["US_LNG"] = US_LNG
+        import2020_dict["US_LNG"] = US_LONG
         import2020_dict["CITY"] = CITY
         import2020_dict["STATE_ID"] = STATE_ID
         import2020_dict["STATE"] = STATE
         import2020_dict["POPULATION"] = POPULATION
-        import2020_dict["COUNTRTY_FIPS"] = COUNTRY_FIPS
         import2020_dict["US_LAT_LONG"] = US_LAT_LONG
         import2020_data.append(import2020_dict)
 
