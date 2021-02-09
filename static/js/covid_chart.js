@@ -5,16 +5,15 @@ function productChanged(product) {
 }
 
 function infoTypeChanged() {
-    var dropdown = d3.select("#selProduct").value;
+    var dropdown = d3.select("#selProduct").node().value;
     var radio = d3.select("input[name='infoType']:checked").node().value;
     buildTimeChart(dropdown, radio);
 }
 
 // Function to build the time series chart for the selected product
 function buildTimeChart(product, infoType) {
+    console.log(product, infoType);
     // Create variables to save the data to
-    console.log(product);
-    console.log(infoType);
 
     // Read in COVID data and save to variables
 
@@ -26,12 +25,19 @@ function buildTimeChart(product, infoType) {
 }
 
 function init() {
-    //var dropdown = d3.select("#selProduct");
-    //var radio = d3.select("input[name='infoType']:checked").node().value;
+    // Get filter information
+    var radio = d3.select("input[name='infoType']:checked").node().value;
 
-    console.log("You can see me.");
-    // Figure out how to populate dropdown with unique values from data.
-    ppeList = []
+    // Populate drop down
+    var dropdown = d3.select("#selProduct");
+    var productOptions = ["One", "Two", "Three"];
+
+    productOptions.forEach(function(product) {
+        dropdown.append("option").text(product).property("value");
+    })
+
+    // Build chart with default info
+    buildTimeChart(productOptions[0], radio);
 
 }
 
