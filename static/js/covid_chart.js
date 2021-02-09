@@ -29,17 +29,16 @@ function init() {
     var radio = d3.select("input[name='infoType']:checked").node().value;
 
     // Populate drop down
-    var dropdown = d3.select("#selProduct");
-    var productOptions = {"One": 1, "Two": 2, "Three": 3};
-    var productNames = Object.keys(productOptions);
-    var productValues = Object.values(productOptions);
+    var productOptions = [{value: 1, text: "One"}, {value: 2, text: "Two"}, {value: 3, text: "Three"}];
 
-    // var menuOptions = menuOptions.selectAll("option")
-    //                     .data(productOptions)
-    //                     .enter()
-    //                     .append("option")
-    //                     .attr("value", function (d) {return d.value;})
-    //                     .text(function (d) {return})
+    var menuOptions = d3.select("#selProduct")
+                        .selectAll("options")
+                        .data(productOptions)
+                        .enter()
+                        .append("option")
+                        .text(function (d) {return d.text})
+                        .attr("value", function (d) {return d.value;})
+                        
 
     // Build chart with default info
     buildTimeChart(productOptions[0], radio);
