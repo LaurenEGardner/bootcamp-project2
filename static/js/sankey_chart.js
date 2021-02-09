@@ -21,8 +21,8 @@ var sankey = d3.sankey()
     .nodePadding(290)
     .size([width, height]);
 
-//url for export 2019
-url_e20 = "http://127.0.0.1:5000/export2020"
+//url for export 2020
+url_e20 = "http://127.0.0.1:5000/export2020/2926100000"
 
 //load the data
 d3.json(url_e20).then(function (data) {
@@ -36,6 +36,7 @@ d3.json(url_e20).then(function (data) {
 
     //pull data from json and append to the lists
     data.forEach(function (d) {
+        //figure out a neater way to do this unique thing. This is ugly
         var found = false;
         var found2 = false;
         var found3 = false;
