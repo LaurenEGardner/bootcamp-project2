@@ -49,7 +49,8 @@ Result: You have retrieved the data and added it to the database.
 
 ### Launching the Site
 To launch our interactive dashboard:
-1. Open the command line and run: python app.py\n
+1. Open the command line and run: python app.py
+    
     Note: Mac users may need to run FLASK_APP=app.py flask run instead.
 2. In an Incognito browser, navigate to http://127.0.0.1:5000.
 
