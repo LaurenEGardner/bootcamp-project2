@@ -136,18 +136,25 @@ function BuildImportsChart(){
     })
 }
 // BuildImportsChart();
-function BuildChart(){
-    if (infoType == "Import") {
+function BuildChart(dataType){
+    if (dataType == "Import") {
         BuildImportsChart();
     } else {
         BuildExportsChart();
     }
+
 }
 
 // Function when the product dropdown value changes
-function infoTypeChanged() {
-    var infoType = d3.select("input[name='infoType']:checked").node().value;
-    //console.log("Info change", productCode, infoType);
-    BuildChart(infoType);
+function dataTypeChanged() {
+    var dataType = d3.select("input[name='dataType']:checked").node().value;
+    console.log("dataType",dataType);
+    BuildChart(dataType);
 }
 
+function init(){
+    var radio = d3.select("input[name='dataType']:checked").node().value;
+    BuildChart(radio);
+}
+
+init();
