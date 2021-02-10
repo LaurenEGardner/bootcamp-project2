@@ -43,6 +43,7 @@ To get the data we used for our project:
     * importAPI.ipynb
     * importAPI2020.ipynb
     * COVID_Info.ipynb
+  
   This will retrieve, clean, and export the data to CSV files.
 3. Open write_data.ipynb and select Kernel > Restart and Run All.
 
@@ -75,3 +76,10 @@ The following routes retrieve monthly and yearly total data for a specific HTS c
 
 The following route retrieves cumulative COVID data for the US for January 2020 - November 2020.
 * /covid2020
+
+## Group Contributions
+* Courtney - 
+* Danica - 
+* Lauren - 
+* Siara - Retrieved and cleaned COVID data. Worked on the time series Plotly chart that displays COVID data vs. Import/Export data for 2020.
+* Stacey - 
