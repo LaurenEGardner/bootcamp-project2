@@ -45,13 +45,13 @@
 				</div>
 			  </div>
 			<div class="row">
-			  <div class="col-md-2">
+			  <div class="col-md-4">
 				<div class="well">
 				  <h4>Import/Export Data</h4><hr>
 				  <p>Choose to view import or export data.</p>
-				  <input type="radio" id="import" name="infoType" onchange="infoTypeChanged()" value="import" checked>
+				  <input type="radio" id="import" name="infoType" onchange="infoTypeChanged()" value="Import" checked>
 				  <label for="import">Import</label><br>
-				  <input type="radio" id="export" name="infoType" onchange="infoTypeChanged()" value="export">
+				  <input type="radio" id="export" name="infoType" onchange="infoTypeChanged()" value="Export">
 				  <label for="export">Export</label><hr>
 				  <p>Select a type of product.</p>
 				  <label for="selProduct">Product: </label>
@@ -67,10 +67,11 @@
 		  </div>
 
 		<!-- `url_for()` is a flask thing to find the location of the file -->
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 		<!-- <script src="{{ url_for('static', filename='js/import_export.js') }}"></script> -->
-		<!-- <script src="{{ url_for('static', filename='js/covid_chart.js') }}"></script> -->
+		<script src="{{ url_for('static', filename='js/covid_chart.js') }}"></script>
 		<!-- <script src="{{ url_for('static', filename='js/bar_chart.js') }}"></script> -->
-		<script src="{{ url_for('static', filename='js/sankey_chart.js') }}"></script>
-		<script src="plotly-latest.min.js"></script>
+		<!-- <script src="{{ url_for('static', filename='js/sankey_chart.js') }}"></script> -->
+		<!-- <script src="plotly-latest.min.js"></script> -->
   </body>
 </html>

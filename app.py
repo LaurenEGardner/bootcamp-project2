@@ -213,6 +213,9 @@ def export2019Totalsdata(productCode):
     if productCode != '0':
         results = results.filter(export2019Totals.COMMODITY == productCode)
 
+    # Filter so each month has only one value
+    results = results.filter(export2019Totals.DOMESTIC_FOREIGN_CODE == '-')
+
     results = results.all()
 
     session.close()
@@ -251,6 +254,9 @@ def export2020Totalsdata(productCode):
     if productCode != '0':
         results = results.filter(export2020Totals.COMMODITY == productCode)
 
+    # Filter so each month has only one value
+    results = results.filter(export2020Totals.DOMESTIC_FOREIGN_CODE == '-')
+
     results = results.all()
 
     session.close()
@@ -287,6 +293,9 @@ def import2019Totalsdata(productCode):
     # If a user requested a code of 0, it would return all results
     if productCode != '0':
         results = results.filter(import2019Totals.COMMODITY == productCode)
+
+    # Filter so each month has only one value
+    results = results.filter(import2019Totals.SUMMARY_LEVEL_2 == 'HS')
 
     results = results.all()
     
@@ -327,6 +336,9 @@ def import2020Totalsdata(productCode):
     # If a user requested a code of 0, it would return all results
     if productCode != '0':
         results = results.filter(import2020Totals.COMMODITY == productCode)
+
+    # Filter so each month has only one value
+    results = results.filter(import2020Totals.SUMMARY_LEVEL_2 == 'HS')
 
     results = results.all()
     
