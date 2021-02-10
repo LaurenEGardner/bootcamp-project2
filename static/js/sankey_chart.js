@@ -1,8 +1,22 @@
-var units = "Widgets";
+// Function when the product dropdown value changes
+function productChanged(productCode) {
+    //console.log("Changed product", productCode);
+    var infoType = d3.select("input[name='infoType']:checked").node().value;
+    getData(productCode, infoType);
+}
+
+function infoTypeChanged() {
+    var productCode = d3.select("#selProduct").node().value;
+    var infoType = d3.select("input[name='infoType']:checked").node().value;
+    //console.log("Info change", productCode, infoType);
+    getData(productCode, infoType);
+}
+
+var units = "Dollars";
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 700 - margin.left - margin.right,
-    height = 3000 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 1000 - margin.top - margin.bottom;
 
 // format variables
 var formatNumber = d3.format(",.0f"),    // zero decimal places
@@ -19,8 +33,8 @@ var svg = d3.select("#sankey").append("svg")
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
-    .nodeWidth(36)
-    .nodePadding(1)
+    .nodeWidth(15)
+    .nodePadding(2)
     .size([width, height]);
 
 var path = sankey.link();
@@ -39,15 +53,15 @@ data.forEach(function (d) {
   allNodes.push({ "name": d.COUNTRY_NAME });
   //check if source is in the link list, if not, add it. If so, add to monthly total
   var found = false;
-  for (index in uniqLinks.links) {
-    if (uniqLinks[index].source === d.DISTRICT_NAME) {
+  for (index in uniqLinks) {
+    if (uniqLinks[index].target === d.COUNTRY_NAME) {
         uniqLinks[index].value +=d.ALL_VALUES_MONTH;
         found = true;
         break;
     }
 }
 if (!found) {
-    graph.links.push({
+    uniqLinks.push({
         "source": d.DISTRICT_NAME,
         "target": d.COUNTRY_NAME,
         "value": +d.ALL_VALUES_MONTH
@@ -55,6 +69,7 @@ if (!found) {
 }
  });
  //only put unique node values into nodes
+ manyNodes=[]
  const map = new Map();
  for (const item of allNodes) {
      if (!map.has(item.name)) {
@@ -64,11 +79,14 @@ if (!found) {
          });
      }
  }
+
+ //trying to sort and only pull the top 10 values out of the links
  uniqLinks.sort((a,b) => (a.value > b.value) ? 1 : -1);
  uniqLinks.reverse();
  console.log(uniqLinks);
  graph.links = uniqLinks.slice(0,10);
-
+ console.log(graph.links) 
+    
  // return only the distinct / unique nodes
  graph.nodes = d3.keys(d3.nest()
  .key(function (d) { return d.name; })
@@ -80,6 +98,17 @@ graph.links.forEach(function (d, i) {
  graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
 });
 
+//add only nodes that are actually needed in the chart into graph.nodes
+// for (index in graph.nodes) {
+//     graph.nodes.push({
+//         name: graph.links.source.name,
+//     })
+//     graph.nodes.push({
+//         name: graph.links.target.name
+//     })
+// }
+console.log(graph.nodes)
+
 // now loop through each nodes to make nodes an array of objects
   // rather than an array of strings
   graph.nodes.forEach(function (d, i) {
@@ -89,7 +118,7 @@ graph.links.forEach(function (d, i) {
   sankey
       .nodes(graph.nodes)
       .links(graph.links)
-      .layout(1);
+      .layout(32);
 
   // add in the links
   var link = svg.append("g").selectAll(".link")
