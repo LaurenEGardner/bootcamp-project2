@@ -8,7 +8,7 @@ function productChanged(productCode) {
 function infoTypeChanged() {
     var productCode = d3.select("#selProduct").node().value;
     var infoType = d3.select("input[name='infoType']:checked").node().value;
-    console.log("Info change", productCode, productName, radio);
+    console.log("Info change", productCode, infoType);
     getData(productCode, infoType);
 }
 
@@ -41,9 +41,9 @@ function getData(productCode, infoType) {
     });
 
     // Give API calls time
-    setTimeout(() => { console.log(productData, "Outside Product D3"); }, 2000);
-    setTimeout(() => { console.log(covidData, "Outside COVID D3"); }, 2000);
-    setTimeout(() => { buildCovidChart(productCode, infoType, covidData, productData); }, 2000);
+    setTimeout(() => { console.log(productData, "Outside Product D3"); }, 1500);
+    setTimeout(() => { console.log(covidData, "Outside COVID D3"); }, 1500);
+    setTimeout(() => { buildCovidChart(productCode, infoType, covidData, productData); }, 1500);
 }
 
 function buildCovidChart(productCode, infoType, covidData, productData) {
@@ -51,15 +51,23 @@ function buildCovidChart(productCode, infoType, covidData, productData) {
     console.log("Inside chart ", productData);
 
     // X axis values (Months will be the same for each graph.)
-    var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-    // Save COVID Data
-    var productInfo = productData.map(row => row.ALL_VALUES_MONTH);
-    console.log("Product Information: ", productInfo);
+    // Get y values for product information
+    var productYValues = [];
+    if (infoType == "Import") {
+        productYValues = productData.map(row => row.GENERAL_VALUES_MONTH);
+    } else {
+        productYValues = productData.map(row => row.ALL_VALUES_MONTH);
+    }
+
+    // Get product name
+    var productName = productData[0].COMMODITY_DESCRIPTION;
+    console.log("Product name from data: ", productName);
 
     var trace1 = {
         x: months,
-        y: productData.map(row => row.ALL_VALUES_MONTH),
+        y: productYValues,
         name: `${productName} ${infoType}`,
         type: 'scatter'
       };
