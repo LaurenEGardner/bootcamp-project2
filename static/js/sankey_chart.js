@@ -91,7 +91,7 @@ d3.json(url_e19).then(function(data) {
         .object(graph.nodes));
 
 
-    // loop through each link replacing the text with its index from node
+    // loop through each link replacing the text with its index from nodes
     graph.links.forEach(function (d, i) {
         graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
         graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
