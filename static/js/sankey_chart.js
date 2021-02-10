@@ -81,10 +81,11 @@ function buildSankeyChart(infoType, productData) {
     allNodes = []
     uniqLinks = [] //a list of the unique links
 
-    if (infoType == "Import") { //value = MONTHLY_CONSUMPTION_VALUE
-        productData.forEach(function (d) {
-            allNodes.push({ "name": d.DISTRICT_NAME });
-            allNodes.push({ "name": d.COUNTRY_NAME });
+
+    productData.forEach(function (d) {
+        allNodes.push({ "name": d.DISTRICT_NAME });
+        allNodes.push({ "name": d.COUNTRY_NAME });
+        if (infoType == "Import") { //value = MONTHLY_CONSUMPTION_VALUE
             //check if source is in the link list, if not, add it. If so, add to monthly total
             var found = false;
             for (index in uniqLinks) {
@@ -101,16 +102,11 @@ function buildSankeyChart(infoType, productData) {
                     "value": +d.MONTHLY_CONSUMPTION_VALUE
                 });
             }
-        });
-
-    } else { //export value = ALL_VALUES_MONTH
-        data.forEach(function (d) {
-            allNodes.push({ "name": d.DISTRICT_NAME });
-            allNodes.push({ "name": d.COUNTRY_NAME });
+        } else { //export value = ALL_VALUES_MONTH
             //check if source is in the link list, if not, add it. If so, add to monthly total
             var found = false;
             for (index in uniqLinks) {
-                if (uniqLinks[index].target === d.COUNTRY_NAME) {
+                if (uniqLinks[index].target === d.DISTRICT_NAME) {
                     uniqLinks[index].value += d.ALL_VALUES_MONTH;
                     found = true;
                     break;
@@ -123,12 +119,12 @@ function buildSankeyChart(infoType, productData) {
                     "value": +d.ALL_VALUES_MONTH
                 });
             }
-        });
-    }
+        }
+    });
 
-    //only put unique node values into nodes
-    manyNodes = []
-    const map = new Map();
+//only put unique node values into nodes
+manyNodes = []
+const map = new Map();
     for (const item of allNodes) {
         if (!map.has(item.name)) {
             map.set(item.name, true);    // set any value to Map
@@ -141,9 +137,9 @@ function buildSankeyChart(infoType, productData) {
     //trying to sort and only pull the top 10 values out of the links
     uniqLinks.sort((a, b) => (a.value > b.value) ? 1 : -1);
     uniqLinks.reverse();
-    console.log(uniqLinks);
+    //console.log(uniqLinks);
     graph.links = uniqLinks.slice(0, 10);
-    console.log(graph.links)
+    //console.log(graph.links)
 
     // return only the distinct / unique nodes
     graph.nodes = d3.keys(d3.nest()
@@ -166,7 +162,7 @@ function buildSankeyChart(infoType, productData) {
     //         name: graph.links.target.name
     //     })
     // }
-    console.log(graph.nodes)
+    //console.log(graph.nodes)
 
     // now loop through each nodes to make nodes an array of objects
     // rather than an array of strings
