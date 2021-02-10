@@ -28,6 +28,7 @@ export2019Totals = Base.classes.export2019Totals
 export2020Totals = Base.classes.export2020Totals
 import2019Totals = Base.classes.import2019Totals
 import2020Totals = Base.classes.import2020Totals
+ImportExport = Base.classes.ImportExport
 covid2020 = Base.classes.covid2020
 
 #################################################
@@ -45,6 +46,29 @@ def home():
     # Return template and data
     return render_template("index.html")
 
+@app.route("/importexport/")
+def importexport():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    # Query all importexport data
+    results = session.query(ImportExport.COMMODITY_DESCRIPTION,ImportExport.EXPORTS_2019,ImportExport.EXPORTS_2020,ImportExport.IMPORTS_2019,ImportExport.IMPORTS_2020)
+    results = results.all()
+    session.close()
+
+#Create a dictionary from row of data and append to a list of dictionaries
+    importexport_data = []
+    for COMMODITY_DESCRIPTION,EXPORTS_2019,EXPORTS_2020,IMPORTS_2019,IMPORTS_2020 in results:
+        importexport_dict = {}
+        importexport_dict["COMMODITY_DESCRIPTION"] = COMMODITY_DESCRIPTION
+        importexport_dict["EXPORTS_2019"] = EXPORTS_2019
+        importexport_dict["EXPORTS_2020"] = EXPORTS_2020
+        importexport_dict["IMPORTS_2019"] = IMPORTS_2019
+        importexport_dict["IMPORTS_2020"] = IMPORTS_2020
+        importexport_data.append(importexport_dict)
+
+    # turn the list of dicts into an array of objects
+    return jsonify(importexport_data)
 
 @app.route("/export2019/<productCode>")
 def export2019data(productCode):
