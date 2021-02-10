@@ -38,13 +38,6 @@
 			  </div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
-				  <div id="sankey">
-					  <p>Sankey chart here.</p>
-				  </div>
-				</div>
-			  </div>
-			<div class="row">
 			  <div class="col-md-4">
 				<div class="well">
 				  <h4>Import/Export Data</h4><hr>
@@ -64,14 +57,21 @@
 				</div>
 			  </div>
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+				  <div id="sankey">
+					  <p>Sankey chart here.</p>
+				  </div>
+				</div>
+			</div>
 		  </div>
 
 		<!-- `url_for()` is a flask thing to find the location of the file -->
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 		<!-- <script src="{{ url_for('static', filename='js/import_export.js') }}"></script> -->
 		<script src="{{ url_for('static', filename='js/covid_chart.js') }}"></script>
-		<!-- <script src="{{ url_for('static', filename='js/bar_chart.js') }}"></script> -->
-		<!-- <script src="{{ url_for('static', filename='js/sankey_chart.js') }}"></script> -->
+		<script src="{{ url_for('static', filename='js/bar_chart.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/sankey_chart.js') }}"></script>
 		<!-- <script src="plotly-latest.min.js"></script> -->
   </body>
 </html>
