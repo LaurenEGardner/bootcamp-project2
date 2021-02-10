@@ -1,3 +1,15 @@
+// Function when the PPE dropdown value changes
+function productChanged(product) {
+    var radio = d3.select("input[name='infoType']:checked").node().value;
+    buildTimeChart(product, radio);
+}
+
+function infoTypeChanged() {
+    var dropdown = d3.select("#selProduct").node().value;
+    var radio = d3.select("input[name='infoType']:checked").node().value;
+    buildTimeChart(dropdown, radio);
+}
+
 console.log("hello from sankey")
 //working on sankey
 // set the dimensions and margins of the graph
@@ -14,8 +26,8 @@ var svg = d3.select("#sankey").append("svg")
         "translate(" + margin.left + "," + margin.top + ")");
 
 // Color scale used
-var color = d3.scaleLinear().domain([1,10])
-    .range(["pink","blue"])
+var color = d3.scaleLinear().domain([1, 10])
+    .range(["pink", "blue"])
 
 // Set the sankey diagram properties
 var sankey = d3.sankey()
@@ -29,7 +41,7 @@ url_e19 = "http://127.0.0.1:5000/export2019/0"
 
 
 // read in json files
-d3.json(url_e19).then(function(data) {
+d3.json(url_e19).then(function (data) {
     console.log(data);
 
     //set up graph in same style as original example but empty
@@ -40,7 +52,6 @@ d3.json(url_e19).then(function(data) {
 
     //pull data from json and append to the lists
     data.forEach(function (d) {
-        //figure out a neater way to do this unique thing. This is ugly
         var found = false;
         //add district name to list
         allNodes.push({ "name": d.DISTRICT_NAME });
@@ -63,14 +74,14 @@ d3.json(url_e19).then(function(data) {
                 "value": +d.ALL_VALUES_MONTH
             });
         }
-    
+
     });
 
     //only put unique node values into nodes
     nodes = []
     const map = new Map();
     for (const item of allNodes) {
-        if(!map.has(item.name)){
+        if (!map.has(item.name)) {
             map.set(item.name, true);    // set any value to Map
             nodes.push({
                 name: item.name,
@@ -79,30 +90,29 @@ d3.json(url_e19).then(function(data) {
     }
 
     //printing links&nodes to see if it's working
-    
+
     console.log("===============hi========")
     console.log(nodes)
-    
-    graph = {"nodes" : nodes, "links" : links}
+
+    graph = { "nodes": nodes, "links": links }
 
     // return only the distinct / unique nodes
     graph.nodes = d3.keys(d3.nest()
         .key(function (d) { return d.name; })
         .object(graph.nodes));
 
-
     // loop through each link replacing the text with its index from nodes
     graph.links.forEach(function (d, i) {
         graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
         graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
     });
-    
+
     console.log(graph.links)
 
     sankey
         .nodes(graph.nodes)
-        .links(graph.links)
-        .layout(32);
+        .links(graph.links);
+        // .layout(1);
 
     // add in the links
     var link = svg.append("g").selectAll(".link")
