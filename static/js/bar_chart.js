@@ -75,3 +75,50 @@ d3.json(url_e19).then(function(data){
 
         })
 
+//url for export 2020
+url_e20 = "http://127.0.0.1:5000/export2020/0"
+
+// read in json files
+d3.json(url_e20).then(function(data){
+        console.log(data);
+        // e19_data = data})
+
+        var e20 = d3.nest()
+            .key(function(d){return d.COMMODITY_DESCRIPTION;})
+            .rollup(function(v){return d3.sum(v, function (d){return d.ALL_VALUES_YEAR;});
+            })
+            .entries(data);
+        console.log(JSON.stringify(e20));
+
+        // X axis
+        var x = d3.scaleBand()
+          .range([ 0, width ])
+          .domain(e20.map(function(e20) { return e20.key; }))
+          .padding(0.2);
+        svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+          .domain([0, d3.max(e20, function(e19) {return e20.value})])
+          .range([ height, 0]);
+        svg.append("g")
+          .call(d3.axisLeft(y));
+
+        // Bars
+        svg.selectAll(".bar")
+          .data(e20)
+          .enter()
+          .append("rect")
+            .attr("x", function(e20) { return x(e20.key); })
+            .attr("y", function(e20) { return y(e20.value); })
+            .attr("width", x.bandwidth())
+            .attr("height", function(e20) { return height - y(e20.value); })    
+            .attr("fill", "#69b3a2")
+
+        })
+
