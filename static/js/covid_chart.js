@@ -14,7 +14,7 @@ function infoTypeChanged() {
 
 // Function to build the time series chart for the selected product
 function getData(productCode, infoType) {
-    console.log(productCode, productName, infoType);
+    console.log(productCode, infoType);
     // Create variables to save the data to
     var productData = {};
     var covidData = {};
