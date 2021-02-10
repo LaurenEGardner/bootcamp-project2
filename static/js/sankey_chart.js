@@ -33,14 +33,15 @@ d3.json(url_e19).then(function (data) {
 //set up graph in same style as original example but empty
 graph = {"nodes" : [], "links" : []};
 allNodes = []
+uniqLinks = [] //a list of the unique links
 data.forEach(function (d) {
   allNodes.push({ "name": d.DISTRICT_NAME });
   allNodes.push({ "name": d.COUNTRY_NAME });
   //check if source is in the link list, if not, add it. If so, add to monthly total
   var found = false;
-  for (index in graph.links) {
-    if (graph.links[index].source === d.DISTRICT_NAME) {
-        graph.links[index].value +=d.ALL_VALUES_MONTH;
+  for (index in uniqLinks.links) {
+    if (uniqLinks[index].source === d.DISTRICT_NAME) {
+        uniqLinks[index].value +=d.ALL_VALUES_MONTH;
         found = true;
         break;
     }
@@ -63,6 +64,10 @@ if (!found) {
          });
      }
  }
+ uniqLinks.sort((a,b) => (a.value > b.value) ? 1 : -1);
+ uniqLinks.reverse();
+ console.log(uniqLinks);
+ graph.links = uniqLinks.slice(0,10);
 
  // return only the distinct / unique nodes
  graph.nodes = d3.keys(d3.nest()
