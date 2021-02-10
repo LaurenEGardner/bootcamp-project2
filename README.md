@@ -43,8 +43,6 @@ To get the data we used for our project:
     * importAPI.ipynb
     * importAPI2020.ipynb
     * COVID_Info.ipynb
-  
-  This will retrieve, clean, and export the data to CSV files.
 3. Open write_data.ipynb and select Kernel > Restart and Run All.
 
 Result: You have retrieved the data and added it to the database. 
