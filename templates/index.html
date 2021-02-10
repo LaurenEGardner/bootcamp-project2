@@ -27,8 +27,12 @@
 			<div class="row">
 			  <div class="col-md-2">
 				<div class="well">
-				  <h5>PPE Product</h5>
-				  <select id="selPPE" onchange="ppeOptionChanged(this.value)"></select>
+					<h4>Import or Export</h4><hr>
+					<p>Choose to view import or export data.</p>
+					<input type="radio" id="import1" name="dataType" onchange="dataTypeChanged()" value="Import" checked>
+					<label for="import">Import</label><br>
+					<input type="radio" id="export1" name="dataType" onchange="dataTypeChanged()" value="Export">
+					<label for="export">Export</label>
 				</div>
 			  </div>
 			  <div class="col-md-5">
@@ -40,7 +44,7 @@
 			<div class="row">
 			  <div class="col-md-4">
 				<div class="well">
-				  <h4>Import/Export Data</h4><hr>
+				  <h4>Data Filters</h4><hr>
 				  <p>Choose to view import or export data.</p>
 				  <input type="radio" id="import" name="infoType" onchange="infoTypeChanged()" value="Import" checked>
 				  <label for="import">Import</label><br>
