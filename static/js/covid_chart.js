@@ -14,6 +14,20 @@ function infoTypeChanged() {
 function buildTimeChart(product, infoType) {
     console.log(product, infoType);
     // Create variables to save the data to
+    var productData = {};
+    var covidData = {};
+
+    d3.json("/export2019totals/3002").then((data) => {
+        console.log(data, "Inside Product D3");
+        productData = data;
+    });
+    d3.json("/covid2020").then((data) => {
+        console.log(data, "Inside COVID D3");
+        covidData = data;
+    });
+
+    setTimeout(() => { console.log(productData, "Outside Product D3"); }, 2000);
+    console.log(covidData, "Outside COVID D3");
 
     // Read in COVID data and save to variables
 
