@@ -66,10 +66,12 @@ The following routes retrieve all data for a specific HTS code. Enter 0 to retri
 * /import2019/<productCode>
 * /export2020/<productCode>
 * /import2020/<productCode>
+
 The following routes retrieve monthly and yearly total data for a specific HTS code. Enter 0 to retrieve data for all codes.
 * /export2019totals/<productCode>
 * /import2019totals/<productCode>
 * /export2020totals/<productCode>
 * /import2020totals/<productCode>
+
 The following route retrieves cumulative COVID data for the US for January 2020 - November 2020.
 * /covid2020
