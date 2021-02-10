@@ -8,9 +8,12 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Our CSS -->
 		<link rel="stylesheet" type="text/css" href="static/css/style.css">
+		<!-- Load d3.js -->
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<!-- Load the sankey.js function (doesn't work if not in head) -->
 		<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
+		<script src="sankey.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	</head>
 	<body>
 
@@ -36,7 +39,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-				  <div class="sankey">
+				  <div id="sankey">
 					  <p>Sankey chart here.</p>
 				  </div>
 				</div>
@@ -63,16 +66,11 @@
 			</div>
 		  </div>
 
-		<!-- <div class="chart"></div> -->
-		<!-- <div class="sankey"></div> -->
-		<!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
-		
-		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 		<!-- `url_for()` is a flask thing to find the location of the file -->
 		<!-- <script src="{{ url_for('static', filename='js/import_export.js') }}"></script> -->
 		<!-- <script src="{{ url_for('static', filename='js/covid_chart.js') }}"></script> -->
 		<!-- <script src="{{ url_for('static', filename='js/bar_chart.js') }}"></script> -->
 		<script src="{{ url_for('static', filename='js/sankey_chart.js') }}"></script>
-		
+		<script src="plotly-latest.min.js"></script>
   </body>
 </html>
