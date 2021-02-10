@@ -1,6 +1,6 @@
-// Function when the PPE dropdown value changes
+// Function when the product dropdown value changes
 function productChanged(productCode) {
-    console.log("Changed product", productCode);
+    //console.log("Changed product", productCode);
     var infoType = d3.select("input[name='infoType']:checked").node().value;
     getData(productCode, infoType);
 }
@@ -8,7 +8,7 @@ function productChanged(productCode) {
 function infoTypeChanged() {
     var productCode = d3.select("#selProduct").node().value;
     var infoType = d3.select("input[name='infoType']:checked").node().value;
-    console.log("Info change", productCode, infoType);
+    //console.log("Info change", productCode, infoType);
     getData(productCode, infoType);
 }
 
@@ -22,33 +22,33 @@ function getData(productCode, infoType) {
 
     if (infoType == "Import") {
         url = "/import2020totals/" + productCode;
-        console.log("Import URL", url);
+        //console.log("Import URL", url);
     } else {
         url = "/export2020totals/" + productCode;
-        console.log("Export URL", url)
+        //console.log("Export URL", url)
     }
 
     // Read in Product data and save to variables
     d3.json(url).then((data) => {
-        console.log(data, "Inside Product D3");
+        //console.log(data, "Inside Product D3");
         productData = data;
     });
 
     // Read in COVID data and save to variables
     d3.json("/covid2020").then((data) => {
-        console.log(data, "Inside COVID D3");
+        //console.log(data, "Inside COVID D3");
         covidData = data;
     });
 
     // Give API calls time
-    setTimeout(() => { console.log(productData, "Outside Product D3"); }, 1500);
-    setTimeout(() => { console.log(covidData, "Outside COVID D3"); }, 1500);
+    //setTimeout(() => { console.log(productData, "Outside Product D3"); }, 1500);
+    //setTimeout(() => { console.log(covidData, "Outside COVID D3"); }, 1500);
     setTimeout(() => { buildCovidChart(productCode, infoType, covidData, productData); }, 1500);
 }
 
 function buildCovidChart(productCode, infoType, covidData, productData) {
     // Create traces and layout
-    console.log("Inside chart ", productData);
+    //console.log("Inside chart ", productData);
 
     // X axis values (Months will be the same for each graph.)
     var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -63,7 +63,7 @@ function buildCovidChart(productCode, infoType, covidData, productData) {
 
     // Get product name
     var productName = productData[0].COMMODITY_DESCRIPTION;
-    console.log("Product name from data: ", productName);
+    //console.log("Product name from data: ", productName);
 
     var trace1 = {
         x: months,
