@@ -79,7 +79,7 @@ d3.json(url_e19).then(function(data) {
     }
 
     //printing links&nodes to see if it's working
-    console.log(links)
+    
     console.log("===============hi========")
     console.log(nodes)
     
@@ -96,7 +96,8 @@ d3.json(url_e19).then(function(data) {
         graph.links[i].source = graph.nodes.indexOf(graph.links[i].source);
         graph.links[i].target = graph.nodes.indexOf(graph.links[i].target);
     });
-
+    
+    console.log(graph.links)
 
     sankey
         .nodes(graph.nodes)
