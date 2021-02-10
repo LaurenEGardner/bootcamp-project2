@@ -30,6 +30,46 @@ Is there an export/import city we should be concerned about being hit by Covid e
      - look at highest volume
      - compare with Covid numbers
 
-## Tasks
-* Pulling data - Courtney
-* Feeding data to database - Siara
+## Running the Project
+
+Follow these instructions to run our project. We will include instructions for running all the way through the data pipeline, but you can skip to the instructions for launching the site if you'd like. 
+
+### Building the Database
+To get the data we used for our project:
+1. Open our project in Jupyter Notebook.
+2. Open and select Kernel > Restart and Run All for the following files:
+    * exportAPI.ipynb
+    * exportAPI2020.ipynb
+    * importAPI.ipynb
+    * importAPI2020.ipynb
+    * COVID_Info.ipynb
+  This will retrieve, clean, and export the data to CSV files.
+3. Open write_data.ipynb and select Kernel > Restart and Run All.
+
+Result: You have retrieved the data and added it to the database. 
+
+### Launching the Site
+To launch our interactive dashboard:
+1. Open the command line and run: python app.py
+    Note: Mac users may need to run FLASK_APP=app.py flask run instead.
+2. In an Incognito browser, navigate to http://127.0.0.1:5000.
+
+Result: You are able to see and use the dashboard.
+
+### Available API Routes
+The following routes are available to retrieve JSON data:
+
+Note: Available HTS codes are: 3002, 3003, 3004, 3005, 3006
+
+The following routes retrieve all data for a specific HTS code. Enter 0 to retrieve data for all codes.
+* /export2019/<productCode>
+* /import2019/<productCode>
+* /export2020/<productCode>
+* /import2020/<productCode>
+The following routes retrieve monthly and yearly total data for a specific HTS code. Enter 0 to retrieve data for all codes.
+* /export2019totals/<productCode>
+* /import2019totals/<productCode>
+* /export2020totals/<productCode>
+* /import2020totals/<productCode>
+The following route retrieves cumulative COVID data for the US for January 2020 - November 2020.
+* /covid2020
