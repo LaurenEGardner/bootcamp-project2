@@ -79,6 +79,6 @@ The following route retrieves cumulative COVID data for the US for January 2020 
 ## Group Contributions
 * Courtney - 
 * Danica - 
-* Lauren - 
+* Lauren - Added initial functionality to app.py for the original dataset to allow for the JSON calls. Built the Sankey diagram that displays the top 10 values of imports/exports and their source country/region & target country/region
 * Siara - Retrieved and cleaned COVID data. Worked on the time series Plotly chart that displays COVID data vs. Import/Export data for 2020.
 * Stacey - 
