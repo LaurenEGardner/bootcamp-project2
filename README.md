@@ -67,7 +67,7 @@ The following route retrieves cumulative COVID data for the US for January 2020 
 ## Group Contributions
 * Courtney - Did research into PPE products, production and corresponding HTS codes. Created incial API call for the census data on PPE imports and Exports for 2019 and 2020. Sources can be found in the resource folder. (Resources-PPE_HTS)[http://localhost:8888/edit/Resources/PPE_HTS.csv]   
 Added US latitude and Longitude coordinates for cities and states to be possiblely used for GEOjson chart.
-* Danica - Complied latitude and longitude data for international import/export and added data to existing databases for possible GEOjson map. 
+* Danica - Compiled latitude and longitude data for international import/export and added data to existing databases for possible GEOjson map. 
 * Lauren - Added initial functionality to app.py for the original dataset to allow for the JSON calls. Built the Sankey diagram that displays the top 10 values of imports/exports and their source country/region & target country/region
 * Siara - Retrieved and cleaned COVID data. Worked on the time series Plotly chart that displays COVID data vs. Import/Export data for 2020.
-* Stacey - 
+* Stacey - Worked on writing jupyter dfs to sql db. Worked on summary import/export bar chart visualization.
