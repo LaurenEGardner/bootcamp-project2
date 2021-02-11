@@ -1,28 +1,28 @@
 // Function when the product dropdown value changes
-function productChanged(productCode) {
+function sankeyProductChanged(productCode) {
     //console.log("Changed product", productCode);
-    var infoType = d3.select("input[name='infoType']:checked").node().value;
+    var infoType = d3.select("input[name='sankeyType']:checked").node().value;
     var yearValue = d3.select("input[name='yearInfoType']:checked").node().value;
-    getData(productCode, infoType, yearValue);
+    getSankeyData(productCode, infoType, yearValue);
 }
 
-function infoTypeChanged() {
+function sankeyTypeChanged() {
     var productCode = d3.select("#selProduct").node().value;
-    var infoType = d3.select("input[name='infoType']:checked").node().value;
+    var infoType = d3.select("input[name='sankeyType']:checked").node().value;
     var yearValue = d3.select("input[name='yearInfoType']:checked").node().value;
     //console.log("Info change", productCode, infoType);
-    getData(productCode, infoType, yearValue);
+    getSankeyData(productCode, infoType, yearValue);
 }
 
 function yearChanged() {
     var productCode = d3.select("#selProduct").node().value;
-    var infoType = d3.select("input[name='infoType']:checked").node().value;
+    var infoType = d3.select("input[name='sankeyType']:checked").node().value;
     var yearValue = d3.select("input[name='yearInfoType']:checked").node().value;
-    getData(productCode, infoType, yearValue);
+    getSankeyData(productCode, infoType, yearValue);
 }
 
 // Function to build the sankey chart for the selected product
-function getData(productCode, infoType, yearValue) {
+function getSankeyData(productCode, infoType, yearValue) {
     console.log(productCode, infoType, yearValue);
     // Create variables to save the data to
     var productData = {};
@@ -253,12 +253,12 @@ const map = new Map();
 
 function init() {
     // Get filter information
-    var radio = d3.select("input[name='infoType']:checked").node().value;
+    var radio = d3.select("input[name='sankeyType']:checked").node().value;
 
     // Populate drop down
     var productOptions = [{ value: 3002, text: "Vaccines, Blood, and Immunological products" }, { value: 3003, text: "Medication (unmeasured doses)" }, { value: 3004, text: "Medication (measured doses)" }, { value: 3005, text: "Medically-treated Bandages" }, { value: 3006, text: "Surgical Equipment" }];
 
-    var menuOptions = d3.select("#selProduct")
+    var menuOptions = d3.select("#sankeyProduct")
         .selectAll("options")
         .data(productOptions)
         .enter()
@@ -271,7 +271,7 @@ function init() {
 
 
     // Build chart with default info
-    getData(productOptions[0].value, radio, year);
+    getSankeyData(productOptions[0].value, radio, year);
 
 }
 
