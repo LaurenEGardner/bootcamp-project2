@@ -32,7 +32,7 @@ function BuildExportsChart() {
             name: '2019',
             // text: xValues.map(String),
             // textposition: 'auto',
-            hoverinfo: 'none',
+            hoverinfo: 'y',
             // opacity: 0.5,
             marker: {
               color: 'rgb(49,130,189)',
@@ -46,7 +46,7 @@ function BuildExportsChart() {
             name: '2020',
             // text: xValues.map(String),
             // textposition: 'auto',
-            hoverinfo: 'none',
+            hoverinfo: 'y',
             marker: {
               color: 'rgb(204,204,204)',
               opacity: 0.8
@@ -100,7 +100,7 @@ function BuildImportsChart(){
             name: '2019',
             // text: xValues.map(String),
             // textposition: 'auto',
-            hoverinfo: 'none',
+            hoverinfo: 'y',
             // opacity: 0.5,
             marker: {
               color: 'rgb(49,130,189)',
@@ -114,7 +114,7 @@ function BuildImportsChart(){
             name: '2020',
             // text: xValues.map(String),
             // textposition: 'auto',
-            hoverinfo: 'none',
+            hoverinfo: 'y',
             marker: {
               color: 'rgb(204,204,204)',
               opacity: 0.8
@@ -152,8 +152,9 @@ function dataTypeChanged() {
     BuildChart(dataType);
 }
 
-function init(){
+function init() {
     var radio = d3.select("input[name='dataType']:checked").node().value;
+    console.log("Inside init", radio);
     BuildChart(radio);
 }
 
