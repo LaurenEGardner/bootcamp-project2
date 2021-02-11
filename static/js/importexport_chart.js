@@ -55,7 +55,7 @@ function BuildExportsChart() {
           var data = [trace1,trace2];
 
           var layout = {
-            title: 'Yearly Change in US Exports (Pharm & Med Equip)',
+            title: 'Yearly Change in US Exports (Pharmaceutical & Medical Equipment)',
             yaxis: {
                 title: 'USD (Trillions)'
             },
@@ -123,7 +123,7 @@ function BuildImportsChart(){
           var data = [trace3,trace4];
 
           var layout = {
-            title: 'Yearly Change in US Imports (Pharm & Med Equip)',
+            title: 'Yearly Change in US Imports (Pharmaceutical & Medical Equipment)',
             yaxis: {
                 title: 'USD (Trillions)'
             },
