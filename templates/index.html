@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
   		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>Importing & Exporting PPE</title>
+		<title>Covid US Imports Exports</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- Our CSS -->
 		<link rel="stylesheet" type="text/css" href="static/css/style.css">
@@ -20,7 +20,8 @@
 		<div class="container">
 			<div class="row">
 			  <div class="col-md-12 jumbotron text-center">
-				<h1>Importing & Exporting PPE in the Time of COVID</h1>
+				<h1>Covid's Impact on US Imports & Exports</h1>
+				<h2>Pharmaceutical and Medical Equipment</h2>
 				<p>Use the interactive charts below to explore the dataset</p>
 			  </div>
 			</div>
@@ -40,13 +41,15 @@
 				</div>
 			  </div>
 			  <div class ="row">
-				<p>Summary of Distribution change graphs (Q1) here <br>
-				</p>
 			</div>			  
 			</div>
 			<div class ="row">
-				<p>Summary of Distribution change graphs (Q1) here <br>
-					filler text</p>
+				<p>This graph compares the yearly change in quantity of U.S. imports and exports of various pharmaceutical and medical supplies between 2019 and 2020. The categories analyzed include Vaccines, Blood, and Immunological Products, Medication in both measured and unmeasured doses, Medically-Treated Bandages, and Surgical Equipment.<br>
+					<p>
+					For imports, we see a notable increase from 2019 to 2020 of medication and vaccines. This follows what we expected due to the impact of Covid in 2020. We also see a decrease in surgical equipment which could possibly be due Covid’s impact on non-elective surgeries.
+					</br><p>
+					For exports, where we see a yearly increase we see a decrease in exports. This suggests the US experienced a higher need for certain categories due to Covid and so had to import more materials than previous years.<br>
+					<br>
 				</p>
 			</div>
 			<div class="row">
@@ -98,9 +101,8 @@
 
 		<!-- `url_for()` is a flask thing to find the location of the file -->
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-		<!-- <script src="{{ url_for('static', filename='js/import_export.js') }}"></script> -->
 		<script src="{{ url_for('static', filename='js/covid_chart.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/bar_chart2.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/importexport_chart.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/sankey_chart.js') }}"></script>
 		<!-- <script src="plotly-latest.min.js"></script> -->
   </body>
