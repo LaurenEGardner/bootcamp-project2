@@ -1,5 +1,6 @@
 // Function when the product dropdown value changes
 function sankeyProductChanged(productCode) {
+    svg.selectAll("*").remove();
     //console.log("Changed product", productCode);
     var infoType = d3.select("input[name='sankeyType']:checked").node().value;
     var yearValue = d3.select("input[name='yearInfoType']:checked").node().value;
@@ -7,6 +8,7 @@ function sankeyProductChanged(productCode) {
 }
 
 function sankeyTypeChanged() {
+    svg.selectAll("*").remove();
     var productCode = d3.select("#selProduct").node().value;
     var infoType = d3.select("input[name='sankeyType']:checked").node().value;
     var yearValue = d3.select("input[name='yearInfoType']:checked").node().value;
@@ -15,6 +17,7 @@ function sankeyTypeChanged() {
 }
 
 function yearChanged() {
+    svg.selectAll("*").remove();
     var productCode = d3.select("#selProduct").node().value;
     var infoType = d3.select("input[name='sankeyType']:checked").node().value;
     var yearValue = d3.select("input[name='yearInfoType']:checked").node().value;
@@ -25,106 +28,97 @@ function yearChanged() {
 function getSankeyData(productCode, infoType, yearValue) {
     console.log(productCode, infoType, yearValue);
     // Create variables to save the data to
-    var productData = {};
-    var url = "";
+    try {
+        var productData = {};
+        var url = "";
 
-    if (infoType == "Import") {
-        url = `/import${yearValue}/` + productCode;
-        console.log("Import URL", url);
-    } else {
-        url = `/export${yearValue}/` + productCode;
-        console.log("Export URL", url)
+        if (infoType == "Import") {
+            url = `/import${yearValue}/` + productCode;
+            console.log("Import URL", url);
+        } else {
+            url = `/export${yearValue}/` + productCode;
+            console.log("Export URL", url)
+        }
+
+        // Read in Product data and save to variables
+        d3.json(url).then((data) => {
+            //console.log(data, "Inside Product D3");
+            productData = data;
+        });
+        svg.selectAll("*").remove();
+        // Give API calls time
+        setTimeout(() => { buildSankeyChart(infoType, productData); }, 1500);
+    } catch (e) {
+        console.log(`${infoType} data for ${productCode} is not available`)
+        d3.select("#sankey").append(`${infoType} data for ${productCode} is not available`)
     }
 
-    // Read in Product data and save to variables
-    d3.json(url).then((data) => {
-        //console.log(data, "Inside Product D3");
-        productData = data;
-    });
-
-    // Give API calls time
-    setTimeout(() => { buildSankeyChart(infoType, productData); }, 1500);
 }
 
+//set basic chart
+var units = "Dollars";
+// set the dimensions and margins of the graph
+var margin = { top: 10, right: 10, bottom: 10, left: 10 },
+    width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// format variables
+var formatNumber = d3.format(",.0f"),    // zero decimal places
+    format = function (d) { return formatNumber(d) + " " + units; },
+    color = d3.scaleOrdinal(d3.schemeCategory10);
+
+// append the svg object to the body of the page
+var svg = d3.select("#sankey").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+// Set the sankey diagram properties
+var sankey = d3.sankey()
+    .nodeWidth(15)
+    .nodePadding(2)
+    .size([width, height]);
+
+var path = sankey.link();
+
 function buildSankeyChart(infoType, productData) {
-    //set up graph in same style as original example but empty
-    d3.select("svg").remove();
-    //set basic chart
-    var units = "Dollars";
-    // set the dimensions and margins of the graph
-    var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-        width = 800 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
 
-    // format variables
-    var formatNumber = d3.format(",.0f"),    // zero decimal places
-        format = function (d) { return formatNumber(d) + " " + units; },
-        color = d3.scaleOrdinal(d3.schemeCategory10);
-
-    // append the svg object to the body of the page
-    var svg = d3.select("#sankey").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    // Set the sankey diagram properties
-    var sankey = d3.sankey()
-        .nodeWidth(15)
-        .nodePadding(2)
-        .size([width, height]);
-
-    var path = sankey.link();
 
     graph = { "nodes": [], "links": [] };
     allNodes = []
     uniqLinks = [] //a list of the unique links
-
-
     productData.forEach(function (d) {
-        allNodes.push({ "name": d.DISTRICT_NAME });
+        allNodes.push({ "name": d.COMMODITY_DESCRIPTION });
         allNodes.push({ "name": d.COUNTRY_NAME });
         if (infoType == "Import") { //value = MONTHLY_CONSUMPTION_VALUE
-            //check if source is in the link list, if not, add it. If so, add to monthly total
-            var found = false;
-            for (index in uniqLinks) {
-                if (uniqLinks[index].target === d.DISTRICT_NAME) {
-                    uniqLinks[index].value += d.MONTHLY_CONSUMPTION_VALUE;
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                uniqLinks.push({
-                    "source": d.DISTRICT_NAME,
-                    "target": d.COUNTRY_NAME,
-                    "value": +d.MONTHLY_CONSUMPTION_VALUE
-                });
-            }
+            monthlyValue = d.MONTHLY_CONSUMPTION_VALUE
         } else { //export value = ALL_VALUES_MONTH
-            //check if source is in the link list, if not, add it. If so, add to monthly total
-            var found = false;
-            for (index in uniqLinks) {
-                if (uniqLinks[index].target === d.DISTRICT_NAME) {
-                    uniqLinks[index].value += d.ALL_VALUES_MONTH;
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                uniqLinks.push({
-                    "source": d.DISTRICT_NAME,
-                    "target": d.COUNTRY_NAME,
-                    "value": +d.ALL_VALUES_MONTH
-                });
+            monthlyValue = d.ALL_VALUES_MONTH
+        }
+        //check if source is in the link list, if not, add it. If so, add to monthly total
+        var found = false;
+        for (index in uniqLinks) {
+            if (uniqLinks[index].target === d.COUNTRY_NAME) {
+                uniqLinks[index].value += monthlyValue;
+                found = true;
+                break;
             }
         }
+        if (!found) {
+            uniqLinks.push({
+                "source": d.COMMODITY_DESCRIPTION,
+                "target": d.COUNTRY_NAME,
+                "value": +monthlyValue
+            });
+        }
+
     });
 
-//only put unique node values into nodes
-manyNodes = []
-const map = new Map();
+    //only put unique node values into nodes
+    manyNodes = []
+    const map = new Map();
     for (const item of allNodes) {
         if (!map.has(item.name)) {
             map.set(item.name, true);    // set any value to Map
@@ -249,6 +243,7 @@ const map = new Map();
         sankey.relayout();
         link.attr("d", path);
     }
+    
 }
 
 function init() {
@@ -256,7 +251,7 @@ function init() {
     var radio = d3.select("input[name='sankeyType']:checked").node().value;
 
     // Populate drop down
-    var productOptions = [{ value: 3002, text: "Vaccines, Blood, and Immunological products" }, { value: 3003, text: "Medication (unmeasured doses)" }, { value: 3004, text: "Medication (measured doses)" }, { value: 3005, text: "Medically-treated Bandages" }, { value: 3006, text: "Surgical Equipment" }];
+        var productOptions = [{ value: 3002, text: "Vaccines, Blood, and Immunological products" }, { value: 3003, text: "Medication (unmeasured doses)" }, { value: 3004, text: "Medication (measured doses)" }, { value: 3005, text: "Medically-treated Bandages" }, { value: 3006, text: "Surgical Equipment" }];
 
     var menuOptions = d3.select("#sankeyProduct")
         .selectAll("options")
@@ -268,6 +263,8 @@ function init() {
 
     // Get selected year
     var year = d3.select("input[name='yearInfoType']:checked").node().value;
+
+
 
 
     // Build chart with default info
