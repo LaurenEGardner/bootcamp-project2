@@ -55,7 +55,7 @@ function BuildExportsChart() {
           var data = [trace1,trace2];
 
           var layout = {
-            title: 'Exports',
+            title: 'Yearly Change in US Exports (Medical Equipment)',
             yaxis: {
                 title: 'USD (Trillions)'
             },
@@ -123,7 +123,7 @@ function BuildImportsChart(){
           var data = [trace3,trace4];
 
           var layout = {
-            title: 'Imports',
+            title: 'Yearly Change in US Imports (Medical Equipment))',
             yaxis: {
                 title: 'USD (Trillions)'
             },
